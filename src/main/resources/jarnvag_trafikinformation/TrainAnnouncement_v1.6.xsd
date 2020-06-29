@@ -1,0 +1,413 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation xml:lang="sv">Tidtabellsinformation, d.v.s information om tåg på trafikplatser (stationer, hållplatser) varje post motsvarar ett visst tåg vid respektive trafikplats.</xs:documentation>
+  </xs:annotation>
+  <xs:annotation>
+    <xs:documentation xml:lang="sv">
+De fält i objekttypen TrainAnnouncement som innehåller både kod och textbeskrivning, t.ex. Deviation.Code och Deviation.Description
+motsvarar Code och Level3Description i objekttypen ReasonCodes.
+Förändringslogg
+Följande fält har utökats till att innehålla både kod och textbeskrivning:
+TypeOfTraffic[].Code
+TypeOfTraffic[].Description
+</xs:documentation>
+  </xs:annotation>
+  <xs:element name="RESPONSE" type="RESPONSE" />
+  <xs:complexType name="RESPONSE">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="RESULT" type="RESULT" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RESULT">
+    <xs:sequence>
+      <xs:element name="TrainAnnouncement" type="TrainAnnouncement" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element minOccurs="0" name="ERROR" type="ERROR" />
+      <xs:element minOccurs="0" name="INFO" type="INFO" />
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="ERROR">
+    <xs:sequence>
+      <xs:element name="SOURCE" type="xs:string" minOccurs="0" />
+      <xs:element name="MESSAGE" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LASTMODIFIED">
+    <xs:attribute name="datetime" type="xs:dateTime" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="EVALRESULT">
+    <xs:sequence>
+      <xs:any minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="INFO">
+    <xs:sequence>
+      <xs:element name="LASTMODIFIED" type="LASTMODIFIED" minOccurs="0" />
+      <xs:element name="LASTCHANGEID" type="xs:string" minOccurs="0" />
+      <xs:element name="EVALRESULT" type="EVALRESULT" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="SSEURL" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TrainAnnouncement">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ActivityId" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Aktivitetens unika id</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ActivityType" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">"Ankomst" eller "Avgang"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Advertised" type="xs:boolean" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger om ankomsten/avgången annonseras i tidtabell</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="AdvertisedTimeAtLocation" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Tidtabellstid</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="AdvertisedTrainIdent" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Annonserat tågnummer (tågnumret som står på biljetten)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Booking" type="Booking">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Kod för bokningsinformation och bokningsinformation, ex: "Vagn 4 obokad</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Canceled" type="xs:boolean" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger om ankomsten/avgången är inställd</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Deleted" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger att dataposten raderats</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Deviation" type="Deviation">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Eventuell avvikelse med full orsakskod, ex: ABC023 och beskrivning, ex: "Buss ersätter", "Spårändrat", "Kort tåg", "Ej servering" o.s.v.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="EstimatedTimeAtLocation" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Tidpunkt för beräknad ankomst eller avgång</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="EstimatedTimeIsPreliminary" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger om en beräknad tid är preliminär. Notera att om den beräknade tiden är preliminär så innebär det att den kan ändras både framåt och bakåt, ett tåg kan alltså t.ex avgå tidigare än beräknad tidpunkt om den också är markerad som preliminär.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FromLocation" type="FromLocation">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Från station för tåget med ordning och i vilken prioritet som ska visas. Notera att det avser vad som ska annonseras för resenärerna, det vill säga vad som ska visas på skyltar o.dyl. FromLocation kan med andra ord ha olika innehåll för samma tåg vid olika stationer och olika innehåll vad ankomster respektive avgångar. Fältet anger hur från-stationer ska annonseras.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="InformationOwner" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Namnet på trafikinformationsägaren</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="LocationSignature" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Signatur för stationen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="MobileWebLink" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Url till trafikägarens mobila hemsida</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ModifiedTime" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Tidpunkt då dataposten ändrades</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="NewEquipment" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger i vilken ordning tåget nyutrustats. Om ingen nyutrustning skett kommer värdet vara noll</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Operator" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Det järnvägsföretag som utför järnvägstrafik, alltså kör tåget, för en trafikorganisatör.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OtherInformation" type="OtherInformation">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Kod för övrig annonseringsinformation och övrig annonseringsinformation, ex. "Trevlig resa!", "Bakre fordon går låst!",  "Ingen påstigning"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="PlannedEstimatedTimeAtLocation" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger en planerad försening och dess giltighet anges med PlannedEstimatedTimeAtLocationIsValid-flaggan</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="PlannedEstimatedTimeAtLocationIsValid" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger om PlaneradBeraknadTid är giltig. Kommer sättas till false när en operativ beräknad tidrapport, tidrapport eller slopningsrapport skapas</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ProductInformation" type="ProductInformation">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Kod för beskrivning av tåget och beskrivning av tåget, ex. "Tågkompaniet", "SJ InterCity", "TiB/Tågkomp"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ScheduledDepartureDateTime" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Tågets annonserade avgångsdatum</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Service" type="Service">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Servicekod och lite extra utöver produktinformation, ex "Bistro", "Sov-och liggv"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="TechnicalDateTime" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Teknisk tid</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="TechnicalTrainIdent" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Tekniskt tågnummer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="TimeAtLocation" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">När tåget har ankommit eller avgått</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="TimeAtLocationWithSeconds" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">När tåget har ankommit eller avgått, med sekunder</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ToLocation" type="ToLocation">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Till station för tåget med ordning och i vilken prioritet som ska visas. Notera att det avser vad som ska annonseras för resenärerna, det vill säga vad som ska visas på skyltar o.dyl. ToLocation kan med andra ord ha olika innehåll för samma tåg vid olika stationer och olika innehåll vad ankomster respektive avgångar. Fältet anger hur till-stationer ska annonseras.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="TrackAtLocation" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Spår</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TrainComposition" type="TrainComposition">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Kod för tågsammansättning och tågsammansättning, ex: "Vagnsordning 7, 6, 5, 4, 2, 1"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="TrainOwner" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Ägaren av det aktuella tågläget</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TypeOfTraffic" type="TypeOfTraffic">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+              Trafiktypen, ex. "Buss", "Pendeltåg", "Taxi", "Tåg".
+            </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ViaFromLocation" type="ViaFromLocation" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ViaToLocation" type="ViaToLocation" />
+      <xs:element minOccurs="0" name="WebLink" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Url till trafikägarens hemsida</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="WebLinkName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Namn på trafikinfoägaren att använda i länkar</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Booking">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Kod för bokningsinformation</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Description" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Text som ger bokningsinformation, ex: "Vagn 4 obokad", "Platsbiljett krävs"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Deviation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Kod för avvikelse</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Description" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Text som beskriver avvikelse, ex: "Buss ersätter", "Spårändrat", "Kort tåg", "Ej servering", "Oväder"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FromLocation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="LocationName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Namn på frånstation. Notera att det avser vad som ska annonseras för resenärerna, det vill säga vad som ska visas på skyltar o.dyl. FromLocation kan med andra ord ha olika innehåll för samma tåg vid olika stationer och olika innehåll vad ankomster respektive avgångar. Fältet anger hur från-stationer ska annonseras.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Priority" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Prioritet för vilka stationer som ska visas.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Order" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Vilken ordning stationer ska visas.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OtherInformation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Kod för övrig annonseringsinformation</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Description" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Text som ger övrig annonseringinformation, ex. "Trevlig resa!", "Bakre vagnen låst!", "Ingen påstigning"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ProductInformation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Kod för produkten</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Description" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Text som beskriver produkten, ex. "Västtågen", "SJ Snabbtåg", "Pågatågen"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Service">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Kod för service</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Description" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Text som beskriver den service som finns, ex "Bistro", "Sov-och liggvagnar", "Kiosk"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ToLocation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="LocationName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Tillstation för tåget. Notera att det avser vad som ska annonseras för resenärerna, det vill säga vad som ska visas på skyltar o.dyl. ToLocation kan med andra ord ha olika innehåll för samma tåg vid olika stationer och olika innehåll vad ankomster respektive avgångar. Fältet anger hur till-stationer ska annonseras.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Priority" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Prioritet för vilka stationer som ska visas.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Order" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Vilken ordning stationer ska visas.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TrainComposition">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Kod för tågsammansättning</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Description" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Text som beskriver tågsammansättning, ex: "Vagnsordning 7, 6, 5, 4, 2, 1"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TypeOfTraffic">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+              Kod för trafiktyp
+            </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Description" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+              Trafiktypen, ex. "Buss", "Pendeltåg", "Taxi", "Tåg".
+            </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ViaFromLocation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="LocationName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Namn på via frånstation. Notera att det avser vad som ska annonseras för resenärerna, det vill säga vad som ska visas på skyltar o.dyl. ViaFromLocation kan med andra ord ha olika innehåll för samma tåg vid olika stationer och olika innehåll vad ankomster respektive avgångar. Fältet anger hur från-stationer ska annonseras.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Priority" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Prioritet för vilka stationer som ska visas.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Order" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Vilken ordning stationer ska visas.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ViaToLocation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="LocationName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Namn på vi. Notera att det avser vad som ska annonseras för resenärerna, det vill säga vad som ska visas på skyltar o.dyl. ViaToLocation kan med andra ord ha olika innehåll för samma tåg vid olika stationer och olika innehåll vad ankomster respektive avgångar. Fältet anger hur till-stationer ska annonseras.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Priority" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Prioritet för vilka stationer som ska visas.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Order" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Vilken ordning stationer ska visas.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

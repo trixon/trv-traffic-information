@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation xml:lang="sv">Ankomster och avgångar.</xs:documentation>
+  </xs:annotation>
+  <xs:element name="RESPONSE" type="RESPONSE" />
+  <xs:complexType name="RESPONSE">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="RESULT" type="RESULT" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RESULT">
+    <xs:sequence>
+      <xs:element name="FerryAnnouncement" type="FerryAnnouncement" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element minOccurs="0" name="ERROR" type="ERROR" />
+      <xs:element minOccurs="0" name="INFO" type="INFO" />
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="ERROR">
+    <xs:sequence>
+      <xs:element name="SOURCE" type="xs:string" minOccurs="0" />
+      <xs:element name="MESSAGE" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LASTMODIFIED">
+    <xs:attribute name="datetime" type="xs:dateTime" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="EVALRESULT">
+    <xs:sequence>
+      <xs:any minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="INFO">
+    <xs:sequence>
+      <xs:element name="LASTMODIFIED" type="LASTMODIFIED" minOccurs="0" />
+      <xs:element name="LASTCHANGEID" type="xs:string" minOccurs="0" />
+      <xs:element name="EVALRESULT" type="EVALRESULT" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="SSEURL" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FerryAnnouncement">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Deleted" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger att dataposten raderats</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="DepartureTime" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Avgångstid</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="DeviationId" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Referens till Deviation.Id i objektet Situation</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Id" type="xs:long">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Avgångens id</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Info" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Information om avgången</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="FromHarbor" type="FromHarbor">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Avgår från</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ModifiedTime" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Tidpunkt då dataposten ändrades</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ToHarbor" type="ToHarbor">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Ankommer till</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Route" type="Route">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Information om rutten</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FromHarbor">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Avgår från (id)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Name" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Avgår från (namn)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ToHarbor">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Ankommer till (id)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Name" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Ankommer till (namn)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Route">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Beskrivande text om rutten</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Id" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Ruttens id</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Name" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Ruttens namn</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Shortname" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Ruttens korntamn</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Type" type="Type">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Ledtyp</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Type">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Id för ledtypen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Name" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Namn för ledtypen (ex. Vändande) </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

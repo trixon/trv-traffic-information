@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation xml:lang="sv">Ikoner, exempelvis för använding i grafiska användargränssnitt och kartor.</xs:documentation>
+  </xs:annotation>
+  <xs:element name="RESPONSE" type="RESPONSE" />
+  <xs:complexType name="RESPONSE">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="RESULT" type="RESULT" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RESULT">
+    <xs:sequence>
+      <xs:element name="Icon" type="Icon" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element minOccurs="0" name="ERROR" type="ERROR" />
+      <xs:element minOccurs="0" name="INFO" type="INFO" />
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="ERROR">
+    <xs:sequence>
+      <xs:element name="SOURCE" type="xs:string" minOccurs="0" />
+      <xs:element name="MESSAGE" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LASTMODIFIED">
+    <xs:attribute name="datetime" type="xs:dateTime" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="EVALRESULT">
+    <xs:sequence>
+      <xs:any minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="INFO">
+    <xs:sequence>
+      <xs:element name="LASTMODIFIED" type="LASTMODIFIED" minOccurs="0" />
+      <xs:element name="LASTCHANGEID" type="xs:string" minOccurs="0" />
+      <xs:element name="EVALRESULT" type="EVALRESULT" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="SSEURL" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Icon">
+    <xs:sequence>
+      <xs:element name="Deleted" type="xs:boolean" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger att dataposten raderats</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Description" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Kort beskrivning av ikonen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Id" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Ikonens id, refereras från andra objekttyper i fältet IconId</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ModifiedTime" type="xs:dateTime" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Tidpunkt då dataposten ändrades</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Base64" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:appinfo>
+            <xs:createindex value="false" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+          </xs:appinfo>
+          <xs:documentation xml:lang="sv">
+              Förhandsgranskning av ikon där bilden representeras som en Base64-enkodad sträng.<br />
+              En webbläsare kan direkt visa en Base64-enkodad bild utan att behöva göra ett anrop till servern. Detta görs i HTML genom att img-elementets src-attribut inleds med <code>data:image/png;base64,</code> följt av själva datat. Exempel:<br /><pre class="prettyprint">&lt;img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" /&gt;</pre>
+              Resultat: <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" /><br />
+              Läs mer om Base64 - <a href="http://sv.wikipedia.org/wiki/Base64" target="_blank">http://sv.wikipedia.org/wiki/Base64</a></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Url" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+              Url till ikonbilden<br />
+              Notera att det finns tre olika ikonbilder vilka specifieras med Url-parametern 'type'. Om ingen typ specificeras returneras png32x32.<br /><table class="table table-bordered table-condensed table-striped"><tr class="headerRowClass"><th>type</th><th>Beskrivning</th></tr><tr><td>svg</td><td>Filformat SVG</td></tr><tr><td>png16x16</td><td>Filformat PNG i storlek 16x16 pixlar</td></tr><tr><td>png32x32</td><td>Filformat PNG i storlek 32x32 pixlar</td></tr></table><p>
+                Exempel:<br />
+                http://api.trafikinfo.trafikverket.se/v1/icons/roadwork?type=png32x32
+              </p><p>
+                SVG (Scalable Vector Graphics) är ett XML-baserat format för vektorgrafik. En vektorbaserad bild kan skalas upp utan kvalitetsförsämring.<br />
+                Läs mer om SVG – <a href="http://sv.wikipedia.org/wiki/Scalable_Vector_Graphics" target="_blank">http://sv.wikipedia.org/wiki/Scalable_Vector_Graphics</a></p><p>
+                PNG (Portable Network Graphics) är ett format för icke-fotografiska bilder så som t.ex. ikoner.<br />
+                Läs mer om PNG– <a href="http://sv.wikipedia.org/wiki/PNG" target="_blank">http://sv.wikipedia.org/wiki/PNG</a></p></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

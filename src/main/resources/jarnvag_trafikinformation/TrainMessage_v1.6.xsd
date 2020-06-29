@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation xml:lang="sv">Tågtrafikmeddelande, exempelvis information kring banarbete, tågfel, anläggningsfel och dylikt.</xs:documentation>
+  </xs:annotation>
+  <xs:annotation>
+    <xs:documentation xml:lang="sv">
+Förändringslogg
+Datamängden har förändrade fält.
+Fältet AffectedLocation är borttaget, denna information finns i TrafficImpact.AffectedLocation
+TrafficImpact.AffectedLocation innehåller nu fältet IsConfimed som anger om trafikpåverkan är bekräftad, eller om den endast är förmodad
+</xs:documentation>
+  </xs:annotation>
+  <xs:element name="RESPONSE" type="RESPONSE" />
+  <xs:complexType name="RESPONSE">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="RESULT" type="RESULT" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RESULT">
+    <xs:sequence>
+      <xs:element name="TrainMessage" type="TrainMessage" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element minOccurs="0" name="ERROR" type="ERROR" />
+      <xs:element minOccurs="0" name="INFO" type="INFO" />
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="ERROR">
+    <xs:sequence>
+      <xs:element name="SOURCE" type="xs:string" minOccurs="0" />
+      <xs:element name="MESSAGE" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LASTMODIFIED">
+    <xs:attribute name="datetime" type="xs:dateTime" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="EVALRESULT">
+    <xs:sequence>
+      <xs:any minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="INFO">
+    <xs:sequence>
+      <xs:element name="LASTMODIFIED" type="LASTMODIFIED" minOccurs="0" />
+      <xs:element name="LASTCHANGEID" type="xs:string" minOccurs="0" />
+      <xs:element name="EVALRESULT" type="EVALRESULT" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="SSEURL" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TrainMessage">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CountyNo" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            <div class="toggleTitle">Länsnummer</div>
+            <div class="toggle arrowR"></div>
+            <div class="toggleContent">
+              <table class="table table-condensed">
+                <tr>
+                  <td>1</td>
+                  <td>Stockholms län</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>
+                      DEPRECATED<br /> Användes tidigare för Stockholms län
+                    </td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Uppsala län</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Södermanlands län</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Östergötlands län</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>Jönköpings län</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>Kronobergs län</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>Kalmar län</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>Gotlands län</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>Blekinge län</td>
+                </tr>
+                <tr>
+                  <td>12</td>
+                  <td>Skåne län</td>
+                </tr>
+                <tr>
+                  <td>13</td>
+                  <td>Hallands län</td>
+                </tr>
+                <tr>
+                  <td>14</td>
+                  <td>Västra Götalands län</td>
+                </tr>
+                <tr>
+                  <td>17</td>
+                  <td>Värmlands län</td>
+                </tr>
+                <tr>
+                  <td>18</td>
+                  <td>Örebro län</td>
+                </tr>
+                <tr>
+                  <td>19</td>
+                  <td>Västmanlands län</td>
+                </tr>
+                <tr>
+                  <td>20</td>
+                  <td>Dalarnas län</td>
+                </tr>
+                <tr>
+                  <td>21</td>
+                  <td>Gävleborgs län</td>
+                </tr>
+                <tr>
+                  <td>22</td>
+                  <td>Västernorrlands län</td>
+                </tr>
+                <tr>
+                  <td>23</td>
+                  <td>Jämtlands län</td>
+                </tr>
+                <tr>
+                  <td>24</td>
+                  <td>Västerbottens län</td>
+                </tr>
+                <tr>
+                  <td>25</td>
+                  <td>Norrbottens län</td>
+                </tr>
+              </table>
+            </div>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Deleted" type="xs:boolean" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger att dataposten raderats</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ExternalDescription" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Informationstext</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Geometry" type="Geometry" minOccurs="0" />
+      <xs:element minOccurs="1" maxOccurs="1" name="EventId" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Unikt id för händelsen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Header" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Redaktörssatt rubrik för händelsen, kan i vissa fall vara samma som ReasonCodeText</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ReasonCode" type="ReasonCode" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TrafficImpact" type="TrafficImpact">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Meddelandets trafikpåverkan</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="StartDateTime" type="xs:dateTime" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Händelsens starttid</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PrognosticatedEndDateTimeTrafficImpact" type="xs:dateTime" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Prognos för då händelsen inte längre väntas påverka trafiken</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="EndDateTime" type="xs:dateTime" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Händelsens sluttid</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="LastUpdateDateTime" type="xs:dateTime" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Tidpunkt då händelsen uppdaterades</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ModifiedTime" type="xs:dateTime" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Tidpunkt då dataposten ändrades</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Geometry">
+    <xs:sequence>
+      <xs:element name="SWEREF99TM" type="WKT_SWEREF99TM" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Geometrisk punkt i koordinatsystem SWEREF99TM</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="WGS84" type="WKT_WGS84" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Geometrisk punkt i koordinatsystem WGS84</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ReasonCode">
+    <xs:sequence>
+      <xs:element name="Code" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+              Orsakskod
+            </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Description" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+              Beskrivande text för orsakskod
+            </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TrafficImpact">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="IsConfirmed" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger om trafikpåverkan är bekräftad. När påverkan inte är bekräftad anges alla platser på den aktuella sträckan som påverkade</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FromLocation" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Påverkad sträckas frånstation, för att avgöra om stationen är påverkad, se fältet AffectedLocation</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AffectedLocation" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Påverkade stationer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ToLocation" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Påverkad sträckas tillstation, för att avgöra om stationen är påverkad, se fältet AffectedLocation</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="WKT_SWEREF99TM">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="POINT\s?\((\d+(\.\d+)?(\s|\))){2}|LINESTRING\s?\(((,\s?)?((\d+(\.\d+)?)\s?){2}){2,}\)|MULTILINESTRING\s?\(\s?((,\s?)?\(((,\s)?((\d+(\.\d+)?)\s?){2}){2,}\)){2,}\s?\)" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="WKT_WGS84">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="POINT\s?\((\d+(\.\d+)?(\s|\))){2}|LINESTRING\s?\(((,\s?)?((\d+(\.\d+)?)\s?){2}){2,}\)|MULTILINESTRING\s?\(\s?((,\s?)?\(((,\s)?((\d+(\.\d+)?)\s?){2}){2,}\)){2,}\s?\)" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

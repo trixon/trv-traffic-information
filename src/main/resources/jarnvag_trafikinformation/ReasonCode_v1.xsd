@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation xml:lang="sv">
+Orsakskoder, varje post representerar en orsakskod.
+Fälten "Code" och "Level3Description" motsvarar fälten "Code" och "Description" för objekttyperna TrainAnnouncement och TrainMessage.
+</xs:documentation>
+  </xs:annotation>
+  <xs:element name="RESPONSE" type="RESPONSE" />
+  <xs:complexType name="RESPONSE">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="RESULT" type="RESULT" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RESULT">
+    <xs:sequence>
+      <xs:element name="ReasonCode" type="ReasonCode" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element minOccurs="0" name="ERROR" type="ERROR" />
+      <xs:element minOccurs="0" name="INFO" type="INFO" />
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="ERROR">
+    <xs:sequence>
+      <xs:element name="SOURCE" type="xs:string" minOccurs="0" />
+      <xs:element name="MESSAGE" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LASTMODIFIED">
+    <xs:attribute name="datetime" type="xs:dateTime" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="EVALRESULT">
+    <xs:sequence>
+      <xs:any minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="INFO">
+    <xs:sequence>
+      <xs:element name="LASTMODIFIED" type="LASTMODIFIED" minOccurs="0" />
+      <xs:element name="LASTCHANGEID" type="xs:string" minOccurs="0" />
+      <xs:element name="EVALRESULT" type="EVALRESULT" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="SSEURL" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ReasonCode">
+    <xs:sequence>
+      <xs:element name="Code" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+                Full orsakskod, detta fält motsvarar det som finns från och med TrainAnnouncement version 1.5 under t.ex. Deviation.Code<br />
+                eller i objekttypen TrainMessage från och med schemaversion 1.5 under ReasonCode.Code
+              </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="GroupDescription" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+                Beskrivning för vilken grupp orsakskoden tillhör, t.ex Annonseringstexter och Orsaker nya principer
+              </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Level1Description" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+                Nivå 1 beskrivning, beskriver vilken typ av orsakskod.
+               </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Level2Description" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+                Nivå 2 beskrivning, beskriver vilken betydelse orsakskoden har, t.ex. Nationell
+              </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Level3Description" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+                Nivå 3 beskrivning, beskrivande text för orsakskoden, detta fält motsvarar det som finns i objekttypen TrainAnnouncement från och med schemaversion 1.5 under t.ex. Deviation.Description<br />
+                eller i objekttypen TrainMessage från och med schemaversion 1.5 under ReasonCode.Description
+              </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Deleted" type="xs:boolean" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+                Anger att dataposten raderats
+              </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ModifiedTime" type="xs:dateTime" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+                Tidpunkt då dataposten ändrades
+              </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

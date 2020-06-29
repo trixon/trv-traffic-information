@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation xml:lang="sv">Vägens geometri relaterat till det data vi tillhandahåller från PMS-systemen med data om beläggningar och mätdata. Vi kan ej garantera att geometrin är dagsaktuell från NVDB. Datum för när data hämtades framgår av posten TimeStamp. </xs:documentation>
+  </xs:annotation>
+  <xs:element name="RESPONSE" type="RESPONSE" />
+  <xs:complexType name="RESPONSE">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="RESULT" type="RESULT" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RESULT">
+    <xs:sequence>
+      <xs:element name="RoadGeometry" type="RoadGeometry" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element minOccurs="0" name="ERROR" type="ERROR" />
+      <xs:element minOccurs="0" name="INFO" type="INFO" />
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="ERROR">
+    <xs:sequence>
+      <xs:element name="SOURCE" type="xs:string" minOccurs="0" />
+      <xs:element name="MESSAGE" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LASTMODIFIED">
+    <xs:attribute name="datetime" type="xs:dateTime" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="EVALRESULT">
+    <xs:sequence>
+      <xs:any minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="INFO">
+    <xs:sequence>
+      <xs:element name="LASTMODIFIED" type="LASTMODIFIED" minOccurs="0" />
+      <xs:element name="LASTCHANGEID" type="xs:string" minOccurs="0" />
+      <xs:element name="EVALRESULT" type="EVALRESULT" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="SSEURL" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RoadGeometry">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="County" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Län.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="RoadMainNumber" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Huvudvägnummer.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="RoadSubNumber" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Undervägnummer. Kallas ibland även punktväg. Måste användas ihop med huvudvägnumret.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Direction" type="Direction" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Length" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Längd.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Geometry" type="Geometry" />
+      <xs:element minOccurs="1" maxOccurs="1" name="TimeStamp" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Datum för när vägdata hämtades ut från källsystemen.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ModifiedTime" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Tidpunkt då dataposten ändrades</xs:documentation>
+          <xs:documentation xml:lang="en">Time when the data item was changed</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Deleted" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger att dataposten raderats</xs:documentation>
+          <xs:documentation xml:lang="en">Indicates that the data record has been deleted</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Direction">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Riktning. Värde.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Value" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Riktning. Beskrivning.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Geometry">
+    <xs:sequence>
+      <xs:element name="SWEREF99TM3D" type="WKT_SWEREF99TM3D" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Geometrisk 3D punkt i koordinatsystem SWEREF99TM. Vissa koordinater kan sakna höjdvärde. Höjdvärdet anges i meter i <a href="https://www.lantmateriet.se/sv/Kartor-och-geografisk-information/GPS-och-geodetisk-matning/Referenssystem/Hojdsystem/RH-2000/" target="_blank">RH 2000</a></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="WGS843D" type="WKT_WGS843D" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Geometrisk 3D punkt i koordinatsystem WGS84. Vissa koordinater kan sakna höjdvärde. Höjdvärdet anges i meter i <a href="https://www.lantmateriet.se/sv/Kartor-och-geografisk-information/GPS-och-geodetisk-matning/Referenssystem/Hojdsystem/RH-2000/" target="_blank">RH 2000</a></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="WKT_SWEREF99TM3D">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="POINT\s?\((-?\d+(\.\d+)?(\s|\))){2,3}|LINESTRING\s?\(((,\s?)?((-?\d+(\.\d+)?)\s?){2,3}){2,}\)|MULTILINESTRING\s?\(\s?((,\s?)?\(((,\s)?((-?\d+(\.\d+)?)\s?){2,3}){2,}\)){2,}\s?\)" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="WKT_WGS843D">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="POINT\s?\((-?\d+(\.\d+)?(\s|\))){2,3}|LINESTRING\s?\(((,\s?)?((-?\d+(\.\d+)?)\s?){2,3}){2,}\)|MULTILINESTRING\s?\(\s?((,\s?)?\(((,\s)?((-?\d+(\.\d+)?)\s?){2,3}){2,}\)){2,}\s?\)" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

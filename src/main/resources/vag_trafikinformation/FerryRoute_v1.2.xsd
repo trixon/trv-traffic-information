@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation xml:lang="sv">Information om färjeleder.</xs:documentation>
+  </xs:annotation>
+  <xs:element name="RESPONSE" type="RESPONSE" />
+  <xs:complexType name="RESPONSE">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="RESULT" type="RESULT" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RESULT">
+    <xs:sequence>
+      <xs:element name="FerryRoute" type="FerryRoute" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element minOccurs="0" name="ERROR" type="ERROR" />
+      <xs:element minOccurs="0" name="INFO" type="INFO" />
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="ERROR">
+    <xs:sequence>
+      <xs:element name="SOURCE" type="xs:string" minOccurs="0" />
+      <xs:element name="MESSAGE" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LASTMODIFIED">
+    <xs:attribute name="datetime" type="xs:dateTime" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="EVALRESULT">
+    <xs:sequence>
+      <xs:any minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="INFO">
+    <xs:sequence>
+      <xs:element name="LASTMODIFIED" type="LASTMODIFIED" minOccurs="0" />
+      <xs:element name="LASTCHANGEID" type="xs:string" minOccurs="0" />
+      <xs:element name="EVALRESULT" type="EVALRESULT" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="SSEURL" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FerryRoute">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Deleted" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger att dataposten raderats</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="DeviationId" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Referens till Deviation.Id i objektet Situation</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Geometry" type="Geometry" minOccurs="0" />
+      <xs:element name="Id" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Ledens id</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ModifiedTime" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Tidpunkt då dataposten ändrades</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Name" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Ledens namn</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Shortname" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Förkortning av ledens namn</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Type" type="Type" minOccurs="0" />
+      <xs:element maxOccurs="unbounded" name="Harbor" type="Harbor" minOccurs="0" />
+      <xs:element maxOccurs="unbounded" name="Timetable" type="Timetable" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Geometry">
+    <xs:sequence>
+      <xs:element name="SWEREF99TM" type="WKT_SWEREF99TM" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Geometrisk punkt i koordinatsystem SWEREF99TM</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="WGS84" type="WKT_WGS84" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Geometrisk punkt i koordinatsystem WGS84</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Type">
+    <xs:sequence>
+      <xs:element name="Id" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Ledtypens id</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Name" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Ledtypens namn</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Harbor">
+    <xs:sequence>
+      <xs:element name="Id" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Hamnens id</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Name" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Hamnens namn</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="SortOrder" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Sorteringsordning</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="StopType" type="StopType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Timetable">
+    <xs:sequence>
+      <xs:element name="Description" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Tidtabellens beskrivning</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Priority" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Tidtabellens prioritet, det kan finnas flera tidtabeller som är giltiga samma datum, den med högst prioritet gäller.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" name="Valid" type="Valid" minOccurs="0" />
+      <xs:element maxOccurs="unbounded" name="Period" type="Period" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="WKT_SWEREF99TM">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="POINT\s?\((\d+(\.\d+)?(\s|\))){2}|LINESTRING\s?\(((,\s?)?((\d+(\.\d+)?)\s?){2}){2,}\)|MULTILINESTRING\s?\(\s?((,\s?)?\(((,\s)?((\d+(\.\d+)?)\s?){2}){2,}\)){2,}\s?\)" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="WKT_WGS84">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="POINT\s?\((\d+(\.\d+)?(\s|\))){2}|LINESTRING\s?\(((,\s?)?((\d+(\.\d+)?)\s?){2}){2,}\)|MULTILINESTRING\s?\(\s?((,\s?)?\(((,\s)?((\d+(\.\d+)?)\s?){2}){2,}\)){2,}\s?\)" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="StopType">
+    <xs:sequence>
+      <xs:element name="Id" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Stopptypens id</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Name" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Namn på stopptypen. Det finns tre olika "Avg", "Ank/Avg" &amp; "Ank"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Visible" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">De med värdet true är synliga i tidtabellen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Valid">
+    <xs:sequence>
+      <xs:element name="From" type="xs:dateTime" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Datumet då tidtabellen börjar gälla</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="To" type="xs:dateTime" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Datumet då tidtabellen slutar gälla</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Period">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Periodens namn</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="SortOrder" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Periodens sorteringsordning</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" name="Weekday" type="Weekday" minOccurs="0" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Schedule" type="Schedule" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Weekday">
+    <xs:sequence>
+      <xs:element name="Day" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Veckodagar som ingår i perioden (dagens namn)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Id" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Veckodagar som ingår i perioden (dagens id)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Schedule">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Deviation" type="Deviation" />
+      <xs:element name="Time" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Tidpunkt för händelse</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Harbor" type="Harbor" minOccurs="0" />
+      <xs:element name="SortOrder" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Sorteringsordning</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="StopType" type="StopType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Deviation">
+    <xs:sequence>
+      <xs:element name="Description" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Beskrivning av avvikelsen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Type" type="DeviationType" minOccurs="0" />
+      <xs:element name="Id" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Avvikelsens id</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="FromDate" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Om avvikelsen gäller under en period så finns den en sträng fråndatum med formatet "mmdd"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ToDate" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Om avvikelsen gäller under en period så finns den en sträng slutdatum med formatet "mmdd"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="SpecDate" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Om avvikelsen gäller specifika datum läggs de till en sträng med formatet "mmdd, mmdd"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DeviationType">
+    <xs:sequence>
+      <xs:element name="Id" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Avvikelsetypens id</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Name" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Avvikelsetypens namn, det finns fyra: "Meddelande", "Kallelse", "Går" &amp; "Går ej"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

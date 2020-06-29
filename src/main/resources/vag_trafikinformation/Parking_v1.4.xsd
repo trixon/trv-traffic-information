@@ -1,0 +1,652 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation xml:lang="sv">Information om rastplatser och parkeringar.</xs:documentation>
+  </xs:annotation>
+  <xs:annotation>
+    <xs:documentation xml:lang="sv">
+Förändringslogg
+VehicleCharacteristics[].VehicleType ersätter VehicleCharacteristics[].VeichleType
+</xs:documentation>
+  </xs:annotation>
+  <xs:element name="RESPONSE" type="RESPONSE" />
+  <xs:complexType name="RESPONSE">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="RESULT" type="RESULT" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RESULT">
+    <xs:sequence>
+      <xs:element name="Parking" type="Parking" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element minOccurs="0" name="ERROR" type="ERROR" />
+      <xs:element minOccurs="0" name="INFO" type="INFO" />
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="ERROR">
+    <xs:sequence>
+      <xs:element name="SOURCE" type="xs:string" minOccurs="0" />
+      <xs:element name="MESSAGE" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LASTMODIFIED">
+    <xs:attribute name="datetime" type="xs:dateTime" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="EVALRESULT">
+    <xs:sequence>
+      <xs:any minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="INFO">
+    <xs:sequence>
+      <xs:element name="LASTMODIFIED" type="LASTMODIFIED" minOccurs="0" />
+      <xs:element name="LASTCHANGEID" type="xs:string" minOccurs="0" />
+      <xs:element name="EVALRESULT" type="EVALRESULT" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="SSEURL" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Parking">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CountyNo" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            <div class="toggleTitle">Länsnummer</div>
+            <div class="toggle arrowR"></div>
+            <div class="toggleContent">
+              <table class="table table-condensed">
+                <tr>
+                  <td>1</td>
+                  <td>Stockholms län</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>
+                      DEPRECATED<br /> Användes tidigare för Stockholms län
+                    </td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Uppsala län</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Södermanlands län</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Östergötlands län</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>Jönköpings län</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>Kronobergs län</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>Kalmar län</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>Gotlands län</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>Blekinge län</td>
+                </tr>
+                <tr>
+                  <td>12</td>
+                  <td>Skåne län</td>
+                </tr>
+                <tr>
+                  <td>13</td>
+                  <td>Hallands län</td>
+                </tr>
+                <tr>
+                  <td>14</td>
+                  <td>Västra Götalands län</td>
+                </tr>
+                <tr>
+                  <td>17</td>
+                  <td>Värmlands län</td>
+                </tr>
+                <tr>
+                  <td>18</td>
+                  <td>Örebro län</td>
+                </tr>
+                <tr>
+                  <td>19</td>
+                  <td>Västmanlands län</td>
+                </tr>
+                <tr>
+                  <td>20</td>
+                  <td>Dalarnas län</td>
+                </tr>
+                <tr>
+                  <td>21</td>
+                  <td>Gävleborgs län</td>
+                </tr>
+                <tr>
+                  <td>22</td>
+                  <td>Västernorrlands län</td>
+                </tr>
+                <tr>
+                  <td>23</td>
+                  <td>Jämtlands län</td>
+                </tr>
+                <tr>
+                  <td>24</td>
+                  <td>Västerbottens län</td>
+                </tr>
+                <tr>
+                  <td>25</td>
+                  <td>Norrbottens län</td>
+                </tr>
+              </table>
+            </div>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Deleted" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger att dataposten raderats</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Equipment" type="Equipment" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DistanceToNearestCity" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+              Avstånd till närmaste stad
+            </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="LocationDescription" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+              Lägesbeskrivning
+            </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+              Beskrivning av parkeringen
+            </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Facility" type="Facility" />
+      <xs:element minOccurs="0" name="IconId" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Ikonid</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Id" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Parkeringens id</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Geometry" type="Geometry">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Parkeringens position</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ModifiedTime" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Tidpunkt då dataposten ändrades</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Name" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Parkeringens namn</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="OpenStatus" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger om rastplatsen är öppen eller stängd (open, closed)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="OperationStatus" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger om det finns några driftstörningar på rastplatsen (limitedOperation) eller om allt fungerar (inOperation)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Operator" type="Operator" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ParkingAccess" type="ParkingAccess" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Photo" type="Photo" />
+      <xs:element minOccurs="0" name="TariffsAndPayment" type="TariffsAndPayment" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UsageSenario" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger användningsområde</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="VehicleCharacteristics" type="VehicleCharacteristics" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Equipment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Type" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            <div class="toggleTitle">
+              Typ av utrustning
+            </div>
+            <div class="toggle arrowR"></div>
+            <div class="toggleContent">
+              <table class="table table-condensed">
+                <tr>
+                  <td>toilet</td>
+                </tr>
+                <tr>
+                  <td>shower</td>
+                </tr>
+                <tr>
+                  <td>informationPoint</td>
+                </tr>
+                <tr>
+                  <td>informatonStele</td>
+                </tr>
+                <tr>
+                  <td>internetTerminal</td>
+                </tr>
+                <tr>
+                  <td>internetWireless</td>
+                </tr>
+                <tr>
+                  <td>payDesk</td>
+                </tr>
+                <tr>
+                  <td>paymentMachine</td>
+                </tr>
+                <tr>
+                  <td>cashMachine</td>
+                </tr>
+                <tr>
+                  <td>vendingMachine</td>
+                </tr>
+                <tr>
+                  <td>faxMachineOrService</td>
+                </tr>
+                <tr>
+                  <td>copyMachineOrService</td>
+                </tr>
+                <tr>
+                  <td>safeDeposit</td>
+                </tr>
+                <tr>
+                  <td>luggageLocker</td>
+                </tr>
+                <tr>
+                  <td>publicPhone</td>
+                </tr>
+                <tr>
+                  <td>publicCoinPhone</td>
+                </tr>
+                <tr>
+                  <td>publicCardPhone</td>
+                </tr>
+                <tr>
+                  <td>elevator</td>
+                </tr>
+                <tr>
+                  <td>picnicFacilities</td>
+                </tr>
+                <tr>
+                  <td>dumpingStation</td>
+                </tr>
+                <tr>
+                  <td>freshWater</td>
+                </tr>
+                <tr>
+                  <td>wasteDisposal</td>
+                </tr>
+                <tr>
+                  <td>refuseBin</td>
+                </tr>
+                <tr>
+                  <td>iceFreeScaffold</td>
+                </tr>
+                <tr>
+                  <td>playground</td>
+                </tr>
+                <tr>
+                  <td>electricChargingStation</td>
+                </tr>
+                <tr>
+                  <td>bikeParking</td>
+                </tr>
+                <tr>
+                  <td>tollTerminal</td>
+                </tr>
+                <tr>
+                  <td>defibrillator</td>
+                </tr>
+                <tr>
+                  <td>firstAidEquipment</td>
+                </tr>
+                <tr>
+                  <td>fireHose</td>
+                </tr>
+                <tr>
+                  <td>fireExtingiusher</td>
+                </tr>
+                <tr>
+                  <td>fireHydrant</td>
+                </tr>
+                <tr>
+                  <td>none</td>
+                </tr>
+                <tr>
+                  <td>unknown</td>
+                </tr>
+                <tr>
+                  <td>other</td>
+                </tr>
+              </table>
+            </div>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Accessibility" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            <div class="toggleTitle">
+              Utrustningens tillgänglighet
+            </div>
+            <div class="toggle arrowR"></div>
+            <div class="toggleContent">
+              <table class="table table-condensed">
+                <tr>
+                  <td>barrierFreeAccessible</td>
+                </tr>
+                <tr>
+                  <td>handicappedAccessible</td>
+                </tr>
+                <tr>
+                  <td>wheelChairAccessible</td>
+                </tr>
+                <tr>
+                  <td>handicappedEasements</td>
+                </tr>
+                <tr>
+                  <td>orientationSystemForBlindPeople</td>
+                </tr>
+                <tr>
+                  <td>handicappedMarked</td>
+                </tr>
+                <tr>
+                  <td>none</td>
+                </tr>
+                <tr>
+                  <td>unknown</td>
+                </tr>
+                <tr>
+                  <td>other</td>
+                </tr>
+              </table>
+            </div>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Facility">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Type" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            <div class="toggleTitle">
+              Serviceanläggningar vid parkeringen
+            </div>
+            <div class="toggle arrowR"></div>
+            <div class="toggleContent">
+              <table class="table table-condensed">
+                <tr>
+                  <td>hotel</td>
+                </tr>
+                <tr>
+                  <td>motel</td>
+                </tr>
+                <tr>
+                  <td>overnightAccommodation</td>
+                </tr>
+                <tr>
+                  <td>shop</td>
+                </tr>
+                <tr>
+                  <td>kiosk</td>
+                </tr>
+                <tr>
+                  <td>foodShopping</td>
+                </tr>
+                <tr>
+                  <td>cafe</td>
+                </tr>
+                <tr>
+                  <td>restaurant</td>
+                </tr>
+                <tr>
+                  <td>restaurantSelfService</td>
+                </tr>
+                <tr>
+                  <td>motorwayRestaurant</td>
+                </tr>
+                <tr>
+                  <td>motorwayRestaurantSmall</td>
+                </tr>
+                <tr>
+                  <td>sparePartsShopping</td>
+                </tr>
+                <tr>
+                  <td>petrolStation</td>
+                </tr>
+                <tr>
+                  <td>vehicleMaintenance</td>
+                </tr>
+                <tr>
+                  <td>tyreRepair</td>
+                </tr>
+                <tr>
+                  <td>truckRepair</td>
+                </tr>
+                <tr>
+                  <td>truckWash</td>
+                </tr>
+                <tr>
+                  <td>carWash</td>
+                </tr>
+                <tr>
+                  <td>pharmacy</td>
+                </tr>
+                <tr>
+                  <td>medicalFacility</td>
+                </tr>
+                <tr>
+                  <td>police</td>
+                </tr>
+                <tr>
+                  <td>touristInformation</td>
+                </tr>
+                <tr>
+                  <td>bikeSharing</td>
+                </tr>
+                <tr>
+                  <td>docstop</td>
+                </tr>
+                <tr>
+                  <td>laundry</td>
+                </tr>
+                <tr>
+                  <td>leisureActivities</td>
+                </tr>
+                <tr>
+                  <td>unknown</td>
+                </tr>
+                <tr>
+                  <td>other</td>
+                </tr>
+              </table>
+            </div>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Accessibility" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            <div class="toggleTitle">
+              Serviceanläggningens tillgänglighet
+            </div>
+            <div class="toggle arrowR"></div>
+            <div class="toggleContent">
+              <table class="table table-condensed">
+                <tr>
+                  <td>barrierFreeAccessible</td>
+                </tr>
+                <tr>
+                  <td>handicappedAccessible</td>
+                </tr>
+                <tr>
+                  <td>wheelChairAccessible</td>
+                </tr>
+                <tr>
+                  <td>handicappedEasements</td>
+                </tr>
+                <tr>
+                  <td>orientationSystemForBlindPeople</td>
+                </tr>
+                <tr>
+                  <td>handicappedMarked</td>
+                </tr>
+                <tr>
+                  <td>none</td>
+                </tr>
+                <tr>
+                  <td>unknown</td>
+                </tr>
+                <tr>
+                  <td>other</td>
+                </tr>
+              </table>
+            </div>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Geometry">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SWEREF99TM" type="WKT_SWEREF99TM">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Parkeringens position som en geometrisk punkt i koordinatsystemet SWEREF99TM</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="WGS84" type="WKT_WGS84">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Parkeringens position som en geometrisk punkt i koordinatsystemet WGS84</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Operator">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Contact" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Namn på operatörens kontakt</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ContactEmail" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Operatörens kontaktmail</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ContactTelephoneNumber" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Operatörens kontakttelefon</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Name" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Operatörens namn</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ParkingAccess">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SWEREF99TM" type="WKT_SWEREF99TM">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+              Parkeringens anslutning som en geometrisk punkt i koordinatsystemet SWEREF99TM
+            </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="WGS84" type="WKT_WGS84">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+              Parkeringens anslutning som en geometrisk punkt i koordinatsystemet WGS84
+            </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Photo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Title" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Namn på foto</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Url" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Url till foto</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TariffsAndPayment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FreeOfCharge" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger om parkeringen är gratis att använda</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Tariff" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger parkeringens avgift</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VehicleCharacteristics">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="VehicleType" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Fordonstyp parkeringen är avsedd för</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="NumberOfSpaces" type="xs:unsignedByte">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Antal platser för fordonstypen inkl släp</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="LoadType" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Typ av last parkeringen är avsedd för, exempelvis fryst gods (refrigeratedGoods)
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="WKT_SWEREF99TM">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="POINT\s?\((\d+(\.\d+)?(\s|\))){2}|LINESTRING\s?\(((,\s?)?((\d+(\.\d+)?)\s?){2}){2,}\)|MULTILINESTRING\s?\(\s?((,\s?)?\(((,\s)?((\d+(\.\d+)?)\s?){2}){2,}\)){2,}\s?\)" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="WKT_WGS84">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="POINT\s?\((\d+(\.\d+)?(\s|\))){2}|LINESTRING\s?\(((,\s?)?((\d+(\.\d+)?)\s?){2}){2,}\)|MULTILINESTRING\s?\(\s?((,\s?)?\(((,\s)?((\d+(\.\d+)?)\s?){2}){2,}\)){2,}\s?\)" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

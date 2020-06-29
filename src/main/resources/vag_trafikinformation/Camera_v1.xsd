@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation xml:lang="sv">Kameror för automatisk väglag och trafikflöde.</xs:documentation>
+  </xs:annotation>
+  <xs:element name="RESPONSE" type="RESPONSE" />
+  <xs:complexType name="RESPONSE">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="RESULT" type="RESULT" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RESULT">
+    <xs:sequence>
+      <xs:element name="Camera" type="camera" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element minOccurs="0" name="ERROR" type="ERROR" />
+      <xs:element minOccurs="0" name="INFO" type="INFO" />
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="ERROR">
+    <xs:sequence>
+      <xs:element name="SOURCE" type="xs:string" minOccurs="0" />
+      <xs:element name="MESSAGE" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LASTMODIFIED">
+    <xs:attribute name="datetime" type="xs:dateTime" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="EVALRESULT">
+    <xs:sequence>
+      <xs:any minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="INFO">
+    <xs:sequence>
+      <xs:element name="LASTMODIFIED" type="LASTMODIFIED" minOccurs="0" />
+      <xs:element name="LASTCHANGEID" type="xs:string" minOccurs="0" />
+      <xs:element name="EVALRESULT" type="EVALRESULT" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="SSEURL" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="camera">
+    <xs:sequence>
+      <xs:element name="Active" type="xs:boolean" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger om kameran är aktiv eller ej</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="CameraGroup" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Id för kameragrupp som kameran tillhör</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ContentType" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Filändelse</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" name="CountyNo" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            <div class="toggleTitle">Länsnummer</div>
+            <div class="toggle arrowR"></div>
+            <div class="toggleContent">
+              <table class="table table-condensed">
+                <tr>
+                  <td>1</td>
+                  <td>Stockholms län</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>
+                      DEPRECATED<br /> Användes tidigare för Stockholms län
+                    </td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Uppsala län</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Södermanlands län</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Östergötlands län</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>Jönköpings län</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>Kronobergs län</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>Kalmar län</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>Gotlands län</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>Blekinge län</td>
+                </tr>
+                <tr>
+                  <td>12</td>
+                  <td>Skåne län</td>
+                </tr>
+                <tr>
+                  <td>13</td>
+                  <td>Hallands län</td>
+                </tr>
+                <tr>
+                  <td>14</td>
+                  <td>Västra Götalands län</td>
+                </tr>
+                <tr>
+                  <td>17</td>
+                  <td>Värmlands län</td>
+                </tr>
+                <tr>
+                  <td>18</td>
+                  <td>Örebro län</td>
+                </tr>
+                <tr>
+                  <td>19</td>
+                  <td>Västmanlands län</td>
+                </tr>
+                <tr>
+                  <td>20</td>
+                  <td>Dalarnas län</td>
+                </tr>
+                <tr>
+                  <td>21</td>
+                  <td>Gävleborgs län</td>
+                </tr>
+                <tr>
+                  <td>22</td>
+                  <td>Västernorrlands län</td>
+                </tr>
+                <tr>
+                  <td>23</td>
+                  <td>Jämtlands län</td>
+                </tr>
+                <tr>
+                  <td>24</td>
+                  <td>Västerbottens län</td>
+                </tr>
+                <tr>
+                  <td>25</td>
+                  <td>Norrbottens län</td>
+                </tr>
+              </table>
+            </div>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Deleted" type="xs:boolean" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger att dataposten raderats</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Description" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Beskrivning</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Direction" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger i grader vilket håll kameran är riktad åt</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Geometry" type="geometry" minOccurs="0" />
+      <xs:element name="HasFullSizePhoto" type="xs:boolean" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger om det finns ett högupplöst foto. Finns det en högupplöst version av bilden fås den genom att ange queryparametern type=fullsize efter PhotoUrl</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="HasSketchImage" type="xs:boolean" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger om det finns skiss över kamerans position och riktning. Finns det en skiss fås den genom att ange queryparametern type=sketch efter PhotoUrl</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="IconId" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger ikonid för kameratypen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Id" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Unikt id för kameran</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Location" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Fritext som anger var kameran är placerad</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ModifiedTime" type="xs:dateTime" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Tidpunkt då dataposten ändrades</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Name" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Namn på kameran</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Type" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Typ av kamera, "Väglagskamera" eller "Trafikflödeskamera"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PhotoTime" type="xs:dateTime" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Tidpunkt då bilden är tagen.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PhotoUrl" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            <div class="toggleTitle">Url till bild 385px*290px, ytterligare funktionalitet</div>
+            <div class="toggle arrowR"></div>
+            <div class="toggleContent">
+                Följande queryparametrar kan användas efter urlen till bilden.
+                <table class="table table-condensed"><tr><td>maxage</td><td>Ange hur gamla bilder i minuter du tillåter. Är bilden äldre än det du anger returneras istället en bild med texten en "aktuell bild saknas". Ex: maxage=15 visar endast bilden om den är nyare än 15 minuter</td></tr><tr><td>type=fullsize</td><td>Om bilden har en högupplöst bild (anges i HasFullSizePhoto) kan man få den genom att ange type=fullsize</td></tr><tr><td>type=sketch</td><td>Om bilden har en översiktsbild (anges i HasSketchImage) kan man få den genom att ange type=sketch</td></tr><tr><td>type=thumbnail</td><td>Vill man ha en mindre version (180px*135px) av bilden anges type=thumbnail</td></tr></table>
+                Ex: <a href="https://api.trafikinfo.trafikverket.se/v1.3/Images/TrafficFlowCamera_39635270.Jpeg?type=fullsize&amp;maxage=15">https://api.trafikinfo.trafikverket.se/v1.3/Images/​TrafficFlowCamera_39635270.Jpeg?type=fullsize&amp;maxage=15</a></div>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Status" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger en statustext för kameran.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="geometry">
+    <xs:sequence>
+      <xs:element name="SWEREF99TM" type="WKT_SWEREF99TM" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Geometrisk punkt i koordinatsystem SWEREF99TM</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="WGS84" type="WKT_WGS84" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Geometrisk punkt i koordinatsystem WGS84</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="WKT_SWEREF99TM">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="POINT\s?\((\d+(\.\d+)?(\s|\))){2}|LINESTRING\s?\(((,\s?)?((\d+(\.\d+)?)\s?){2}){2,}\)|MULTILINESTRING\s?\(\s?((,\s?)?\(((,\s)?((\d+(\.\d+)?)\s?){2}){2,}\)){2,}\s?\)" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="WKT_WGS84">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="POINT\s?\((\d+(\.\d+)?(\s|\))){2}|LINESTRING\s?\(((,\s?)?((\d+(\.\d+)?)\s?){2}){2,}\)|MULTILINESTRING\s?\(\s?((,\s?)?\(((,\s)?((\d+(\.\d+)?)\s?){2}){2,}\)){2,}\s?\)" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

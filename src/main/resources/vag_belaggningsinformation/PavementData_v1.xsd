@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation xml:lang="sv">Beläggningsdata från PMS-systemen kombinerat med relevant vägdata från NVDB. Vi kan ej garantera att det är helt aktuellt data från NVDB. Datum för när data hämtades framgår av posten TimeStamp. För att se källa för respektive data, gå till fliken Om variabler i systemet PMSV3.</xs:documentation>
+  </xs:annotation>
+  <xs:element name="RESPONSE" type="RESPONSE" />
+  <xs:complexType name="RESPONSE">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="RESULT" type="RESULT" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RESULT">
+    <xs:sequence>
+      <xs:element name="PavementData" type="PavementData" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element minOccurs="0" name="ERROR" type="ERROR" />
+      <xs:element minOccurs="0" name="INFO" type="INFO" />
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="ERROR">
+    <xs:sequence>
+      <xs:element name="SOURCE" type="xs:string" minOccurs="0" />
+      <xs:element name="MESSAGE" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LASTMODIFIED">
+    <xs:attribute name="datetime" type="xs:dateTime" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="EVALRESULT">
+    <xs:sequence>
+      <xs:any minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="INFO">
+    <xs:sequence>
+      <xs:element name="LASTMODIFIED" type="LASTMODIFIED" minOccurs="0" />
+      <xs:element name="LASTCHANGEID" type="xs:string" minOccurs="0" />
+      <xs:element name="EVALRESULT" type="EVALRESULT" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="SSEURL" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PavementData">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="County" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Län.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="RoadMainNumber" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Huvudvägnummer.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="RoadSubNumber" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Undervägnummer. Kallas ibland även punktväg. Måste användas ihop med huvudvägnumret.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Direction" type="Direction" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Lane" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Körfält. Räknas från höger sida och startar med körfält 10. Nästa är 20 och kan gå upp till 50.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="StartContinuousLength" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Start löpande längd. Anges i meter. Starten för aktuell åtgärdsinformation angivet i antal meter från vägnumrets start inom det länet, i aktuell riktning.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="EndContinuousLength" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Slut löpande längd. Anges i meter. Slutet för aktuell åtgärdsinformation angivet i antal meter från vägnumrets start inom det länet, i aktuell riktning.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="Length" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Längd i antal meter
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="PavementDate" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Beläggningsdatum. Datum när åtgärd utfördes. (om flera åtgärder på samma sträcka anges senaste datumet)
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="PavementType" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Typ av åtgärd.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="TreatmentCategory" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Åtgärdskategori. Gruppering av åtgärder som är av liknande karaktär.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="MaxStoneSize" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Stenstorlek i beläggningen.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="Thickness" type="xs:double">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Tjocklek. Medelvärde för beläggningsåtgärdens tjocklek.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Contractor" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Entreprenör. Den som utfört åtgärden.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="BallMillValue" type="xs:double">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Kulkvarnsvärde som är aktuell i beläggningsåtgärden.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Binder" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Bindemedel som är aktuellt i beläggningen.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="ManufacturingMethod" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Tillverkningsmetod som använts för beläggningen.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="PavingMethod" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Utläggningsmetod.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Coverage" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Täckning. I vilken utsträckning åtgärden omfattar hela längden angiven för åtgärden eller bredden på körfältet.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="Warranty" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Garantitid. Det antal år som garantitiden gäller för utförd åtgärd.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="WarrantyIsDue" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Garantitid förfaller år. Datum då garantin för åtgärden förfaller.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="FinalInspectionDate" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Datum för besiktningen av åtgärden.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="TimeStamp" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Datum för när NVDB-data och beläggningsdata  hämtades ut från källsystemen.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ModifiedTime" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Tidpunkt då dataposten ändrades</xs:documentation>
+          <xs:documentation xml:lang="en">Time when the data item was changed</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Deleted" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger att dataposten raderats</xs:documentation>
+          <xs:documentation xml:lang="en">Indicates that the data record has been deleted</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Direction">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Riktning. Värde.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Value" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Riktning. Beskrivning.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

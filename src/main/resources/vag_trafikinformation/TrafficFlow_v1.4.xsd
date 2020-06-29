@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation xml:lang="sv">Uppmätta eller härledda värden relaterat till trafik eller enskilda fordonets rörelser på en viss sektion eller vid en specifik punkt på vägnätet.</xs:documentation>
+  </xs:annotation>
+  <xs:element name="RESPONSE" type="RESPONSE" />
+  <xs:complexType name="RESPONSE">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="RESULT" type="RESULT" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RESULT">
+    <xs:sequence>
+      <xs:element name="TrafficFlow" type="trafficFlow" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element minOccurs="0" name="ERROR" type="ERROR" />
+      <xs:element minOccurs="0" name="INFO" type="INFO" />
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="ERROR">
+    <xs:sequence>
+      <xs:element name="SOURCE" type="xs:string" minOccurs="0" />
+      <xs:element name="MESSAGE" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LASTMODIFIED">
+    <xs:attribute name="datetime" type="xs:dateTime" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="EVALRESULT">
+    <xs:sequence>
+      <xs:any minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="INFO">
+    <xs:sequence>
+      <xs:element name="LASTMODIFIED" type="LASTMODIFIED" minOccurs="0" />
+      <xs:element name="LASTCHANGEID" type="xs:string" minOccurs="0" />
+      <xs:element name="EVALRESULT" type="EVALRESULT" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="SSEURL" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="trafficFlow">
+    <xs:sequence>
+      <xs:element name="SiteId" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Detektorns id</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="MeasurementTime" type="xs:dateTime" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Tidpunkt då detta specifika värde eller uppsättning värden har uppmätts. Det är slutet på perioden som skickas från källsystemet</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="MeasurementOrCalculationPeriod" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Den tid som förflutit mellan början och slutet av provtagnings- eller mätperioden. Det här objektet kan skilja sig från enhetens attribut t.ex. ett timmeflöde kan uppskattas från en 5-minuters mätperiod</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="VehicleType" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            <div class="toggleTitle">Fordonets typ</div>
+            <div class="toggle arrowR"></div>
+            <div class="toggleContent">
+              <table class="table table-condensed">
+                <tr>
+                  <td>agriculturalVehicle</td>
+                  <td>Fordon normalt använt för jordbruk, t.ex. Traktor m.fl.</td>
+                </tr>
+                <tr>
+                  <td>anyVehicle</td>
+                  <td>Fordon av ospecificierad typ.</td>
+                </tr>
+                <tr>
+                  <td>articulatedVehicle</td>
+                  <td>Ledat fordon.</td>
+                </tr>
+                <tr>
+                  <td>bicycle</td>
+                  <td>Cykel.</td>
+                </tr>
+                <tr>
+                  <td>bus</td>
+                  <td>Buss.</td>
+                </tr>
+                <tr>
+                  <td>car</td>
+                  <td>Bil.</td>
+                </tr>
+                <tr>
+                  <td>caravan</td>
+                  <td>Husvagn.</td>
+                </tr>
+                <tr>
+                  <td>carOrLightVehicle</td>
+                  <td>Bil eller lätt fordon.</td>
+                </tr>
+                <tr>
+                  <td>carWithCaravan</td>
+                  <td>Bil med husvagn.</td>
+                </tr>
+                <tr>
+                  <td>carWithTrailer</td>
+                  <td>Bil med släpvagn.</td>
+                </tr>
+                <tr>
+                  <td>constructionOrMaintenanceVehicle</td>
+                  <td>Fordon normalt använt inom konstruktion eller underhåll, t.ex. grävmaskin, vägskrapa m.fl.</td>
+                </tr>
+                <tr>
+                  <td>fourWheelDrive</td>
+                  <td>Fyrhjulsdrivet fordon.</td>
+                </tr>
+                <tr>
+                  <td>highSidedVehicle</td>
+                  <td>Högt fordon.</td>
+                </tr>
+                <tr>
+                  <td>lorry</td>
+                  <td>Lastbil.</td>
+                </tr>
+                <tr>
+                  <td>moped</td>
+                  <td>Moped.</td>
+                </tr>
+                <tr>
+                  <td>motorcycle</td>
+                  <td>Motorcykel.</td>
+                </tr>
+                <tr>
+                  <td>motorcycleWithSideCar</td>
+                  <td>Motorcykel med sidovagn.</td>
+                </tr>
+                <tr>
+                  <td>motorscooter</td>
+                  <td>Skoter (ett tvåhjuligt fordon med små hjul och vindskydd framför knäna).</td>
+                </tr>
+                <tr>
+                  <td>tanker</td>
+                  <td>Lastbil speciellt utformad för att frakta vätskor.</td>
+                </tr>
+                <tr>
+                  <td>threeWheeledVehicle</td>
+                  <td>Fordon med tre hjul av ospecificierad typ.</td>
+                </tr>
+                <tr>
+                  <td>trailer</td>
+                  <td>Släpvagn.</td>
+                </tr>
+                <tr>
+                  <td>tram</td>
+                  <td>Spårvagn.</td>
+                </tr>
+                <tr>
+                  <td>twoWheeledVehicle</td>
+                  <td>Fordon med två hjul av ospecificierad typ.</td>
+                </tr>
+                <tr>
+                  <td>van</td>
+                  <td>Skåpbil.</td>
+                </tr>
+                <tr>
+                  <td>vehicleWithCatalyticConverter</td>
+                  <td>Fordon med katalytisk avgasrening.</td>
+                </tr>
+                <tr>
+                  <td>vehicleWithoutCatalyticConverter</td>
+                  <td>Fordon utan katalytisk avgasrening.</td>
+                </tr>
+                <tr>
+                  <td>vehicleWithCaravan</td>
+                  <td>Ospecificierat fordon med husvagn.</td>
+                </tr>
+                <tr>
+                  <td>vehicleWithTrailer</td>
+                  <td>Ospecificierat fordon med släpvagn.</td>
+                </tr>
+                <tr>
+                  <td>withEvenNumberedRegistrationPlates</td>
+                  <td>Fordon vars nummerskylt har jämnt nummer.</td>
+                </tr>
+                <tr>
+                  <td>withOddNumberedRegistrationPlates</td>
+                  <td>Fordon vars nummerskylt har ojämnt nummer.</td>
+                </tr>
+                <tr>
+                  <td>other</td>
+                  <td>Övriga fordon ej benämnda i denna uppräkning.</td>
+                </tr>
+              </table>
+            </div>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="VehicleFlowRate" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Flöde uttryckt i fordon per timme.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AverageVehicleSpeed" type="xs:float" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">En genomsnittlig mätning eller beräkning av hastigheten på fordon på den angivna platsen.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" name="CountyNo" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            <div class="toggleTitle">Länsnummer</div>
+            <div class="toggle arrowR"></div>
+            <div class="toggleContent">
+              <table class="table table-condensed">
+                <tr>
+                  <td>1</td>
+                  <td>Stockholms län</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>
+                      DEPRECATED<br /> Användes tidigare för Stockholms län
+                    </td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Uppsala län</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Södermanlands län</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Östergötlands län</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>Jönköpings län</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>Kronobergs län</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>Kalmar län</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>Gotlands län</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>Blekinge län</td>
+                </tr>
+                <tr>
+                  <td>12</td>
+                  <td>Skåne län</td>
+                </tr>
+                <tr>
+                  <td>13</td>
+                  <td>Hallands län</td>
+                </tr>
+                <tr>
+                  <td>14</td>
+                  <td>Västra Götalands län</td>
+                </tr>
+                <tr>
+                  <td>17</td>
+                  <td>Värmlands län</td>
+                </tr>
+                <tr>
+                  <td>18</td>
+                  <td>Örebro län</td>
+                </tr>
+                <tr>
+                  <td>19</td>
+                  <td>Västmanlands län</td>
+                </tr>
+                <tr>
+                  <td>20</td>
+                  <td>Dalarnas län</td>
+                </tr>
+                <tr>
+                  <td>21</td>
+                  <td>Gävleborgs län</td>
+                </tr>
+                <tr>
+                  <td>22</td>
+                  <td>Västernorrlands län</td>
+                </tr>
+                <tr>
+                  <td>23</td>
+                  <td>Jämtlands län</td>
+                </tr>
+                <tr>
+                  <td>24</td>
+                  <td>Västerbottens län</td>
+                </tr>
+                <tr>
+                  <td>25</td>
+                  <td>Norrbottens län</td>
+                </tr>
+              </table>
+            </div>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Deleted" type="xs:boolean" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger att dataposten raderats</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Geometry" type="geometry" minOccurs="0" />
+      <xs:element name="ModifiedTime" type="xs:dateTime" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Tidpunkt då dataposten ändrades</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="RegionId" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            <div class="toggleTitle">Regionsnummer</div>
+            <div class="toggle arrowR"></div>
+            <div class="toggleContent">
+              <table class="table table-condensed">
+                <tr>
+                  <td>1</td>
+                  <td>Region Norr</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>
+                      Region Mitt
+                    </td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Region Öst</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Region Stockholm</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Region Väst</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>Region Syd</td>
+                </tr>
+              </table>
+            </div>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="SpecificLane" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Vilket körfält som detektorn befinner sig i. Körfält numreras från höger till vänster i vägens körriktning </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="MeasurementSide" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Riktning som detektorn mäter i.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="geometry">
+    <xs:sequence>
+      <xs:element name="SWEREF99TM" type="WKT_SWEREF99TM" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Geometrisk punkt i koordinatsystem SWEREF99TM</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="WGS84" type="WKT_WGS84" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Geometrisk punkt i koordinatsystem WGS84</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="WKT_SWEREF99TM">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="POINT\s?\((\d+(\.\d+)?(\s|\))){2}|LINESTRING\s?\(((,\s?)?((\d+(\.\d+)?)\s?){2}){2,}\)|MULTILINESTRING\s?\(\s?((,\s?)?\(((,\s)?((\d+(\.\d+)?)\s?){2}){2,}\)){2,}\s?\)" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="WKT_WGS84">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="POINT\s?\((\d+(\.\d+)?(\s|\))){2}|LINESTRING\s?\(((,\s?)?((\d+(\.\d+)?)\s?){2}){2,}\)|MULTILINESTRING\s?\(\s?((,\s?)?\(((,\s)?((\d+(\.\d+)?)\s?){2}){2,}\)){2,}\s?\)" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

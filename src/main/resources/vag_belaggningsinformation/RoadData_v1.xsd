@@ -1,0 +1,299 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation xml:lang="sv">Vägdata från NVDB som är relevant tillsammans med PMS-systemens beläggnings och mätdata. Vi kan ej garantera att det är dagsaktuell data från NVDB. Datum för när data hämtades framgår av posten TimeStamp. För att se källa för respektive data, gå till fliken Om variabler i systemet PMSV3.</xs:documentation>
+  </xs:annotation>
+  <xs:element name="RESPONSE" type="RESPONSE" />
+  <xs:complexType name="RESPONSE">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="RESULT" type="RESULT" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RESULT">
+    <xs:sequence>
+      <xs:element name="RoadData" type="RoadData" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element minOccurs="0" name="ERROR" type="ERROR" />
+      <xs:element minOccurs="0" name="INFO" type="INFO" />
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="ERROR">
+    <xs:sequence>
+      <xs:element name="SOURCE" type="xs:string" minOccurs="0" />
+      <xs:element name="MESSAGE" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LASTMODIFIED">
+    <xs:attribute name="datetime" type="xs:dateTime" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="EVALRESULT">
+    <xs:sequence>
+      <xs:any minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="INFO">
+    <xs:sequence>
+      <xs:element name="LASTMODIFIED" type="LASTMODIFIED" minOccurs="0" />
+      <xs:element name="LASTCHANGEID" type="xs:string" minOccurs="0" />
+      <xs:element name="EVALRESULT" type="EVALRESULT" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="SSEURL" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RoadData">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="County" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Län.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="RoadMainNumber" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Huvudvägnummer.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="RoadSubNumber" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Undervägnummer. Kallas ibland även punktväg. Måste användas ihop med huvudvägnumret.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Direction" type="Direction" />
+      <xs:element minOccurs="1" maxOccurs="1" name="LaneDescription" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Körfältsbeskrivning. Beskrivning av körfältskombinationer, främst för att utskilja vilka vägar som har s.k. 2+1 körfältsuppdelning.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="StartContinuousLength" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Start löpande längd.  Anges i meter. Starten för aktuell data angivet i antal meter från vägnumrets start inom det länet, i aktuell riktning.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="EndContinuousLength" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Slut löpande längd. Anges i meter. Slutet för aktuell data angivet i antal meter från vägnumrets start inom det länet, i aktuell riktning.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="Length" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Längd.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="BearingCapacity" type="BearingCapacity" />
+      <xs:element minOccurs="1" maxOccurs="1" name="SpeedLimit" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Hastighetsgräns. Skyltad hastighet. Vid variabel hastighet visar pmsv3 1000 km/h för att markera att hastigheten inte är entydig.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="WearLayer" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Slitlager
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="AADT" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            ÅDT fordon. På mötesseparerad väg anges ÅDT för en riktning i taget. Dvs. den siffra som anges är trafiken i en riktning.
+            På vanlig väg, dvs där trafiken går i båda riktningar, utan mittseparering, gäller ÅDT-siffran båda riktningar tillsammans.
+            Om det finns fler än ett körfält gäller angivna ÅDT-siffran för alla körfält tillsammans.
+            T.ex: Om ÅDT = 20000 fordon och det finns 3 körfält, så kommer ÅDT att anges som 20000 för varje körfält.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="AADTHeavyVehicles" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            ÅDT tung. ÅDT lastbilar avser trafikflöde lastbilar. (Antal lastbilar per årsmedeldygn).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="AADTMeasurementYear" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            ÅDT mätår.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="AADTMeasurementMethod" type="AADTMeasurementMethod" />
+      <xs:element minOccurs="1" maxOccurs="1" name="RoadWidth" type="xs:double">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Vägbredd.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="RoadOwner" type="RoadOwner" />
+      <xs:element minOccurs="0" maxOccurs="1" name="RoadCategory" type="RoadCategory" />
+      <xs:element minOccurs="0" maxOccurs="1" name="RoadType" type="RoadType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Winter2003" type="Winter2003" />
+      <xs:element minOccurs="1" maxOccurs="1" name="RoadConstruction2009" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Vägnybyggnadsår 2009. Det årtal som en nybyggnad utförts på vägen, vägsträckan byggdes, och det årtal som ett förstärkningsarbete utförts på en vägsträcka.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="TimeStamp" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Datum för när vägdata hämtades ut från källsystemet.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ModifiedTime" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Tidpunkt då dataposten ändrades</xs:documentation>
+          <xs:documentation xml:lang="en">Time when the data item was changed</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Deleted" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger att dataposten raderats</xs:documentation>
+          <xs:documentation xml:lang="en">Indicates that the data record has been deleted</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Direction">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Riktning. Värde.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Value" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Riktning. Beskrivning.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BearingCapacity">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Bärighetsklass. Upplåten bärighetsklass på statliga och kommunala vägar. Värde.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Value" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Bärighetsklass. Upplåten bärighetsklass på statliga och kommunala vägar. Beskrivning.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AADTMeasurementMethod">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            ÅDT mätmetod. värde.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Value" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            ÅDT mätmetod. beskrivning.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RoadOwner">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Väghållare. Den som är ansvarig för väghållningen.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Value" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Väghållare. Den som är ansvarig för väghållningen. Beskrivning.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RoadCategory">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Vägkategori. Värde.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Value" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Vägkategori. Beskrivning.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RoadType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Vägtyp. Värde.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Value" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Vägtyp. Beskrivning.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Winter2003">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Vinter2003. Vinter2003/Klassificering map vinterväghållningstandard. Värde.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Value" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Vinter2003. Vinter2003/Klassificering map vinterväghållningstandard. Beskrivning.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

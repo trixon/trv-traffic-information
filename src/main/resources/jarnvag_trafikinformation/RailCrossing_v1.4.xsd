@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation xml:lang="sv">
+Information om plankorsningar, varje post representerar en plankorsning.
+För riktningsberoende företeelser anges höger och vänster med att stå i riktning vänd mot stigande km-tal.
+</xs:documentation>
+  </xs:annotation>
+  <xs:element name="RESPONSE" type="RESPONSE" />
+  <xs:complexType name="RESPONSE">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="RESULT" type="RESULT" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RESULT">
+    <xs:sequence>
+      <xs:element name="RailCrossing" type="RailCrossing" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element minOccurs="0" name="ERROR" type="ERROR" />
+      <xs:element minOccurs="0" name="INFO" type="INFO" />
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="ERROR">
+    <xs:sequence>
+      <xs:element name="SOURCE" type="xs:string" minOccurs="0" />
+      <xs:element name="MESSAGE" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LASTMODIFIED">
+    <xs:attribute name="datetime" type="xs:dateTime" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="EVALRESULT">
+    <xs:sequence>
+      <xs:any minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="INFO">
+    <xs:sequence>
+      <xs:element name="LASTMODIFIED" type="LASTMODIFIED" minOccurs="0" />
+      <xs:element name="LASTCHANGEID" type="xs:string" minOccurs="0" />
+      <xs:element name="EVALRESULT" type="EVALRESULT" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="SSEURL" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RailCrossing">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DataLastUpdated" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Tidpunkt då plankorsningens data senast ändrades</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Deleted" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Anger att dataposten raderats</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ObjectId" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Unikt id för plankorsning.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="LevelCrossingId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Plankorsningens femsiffriga idnummer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="RailwayRouteId" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+              Id för rutt, används för att referera till andra datamängder med samma id
+            </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="RoadRouteId" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+              Id för rutt, används för att referera till andra datamängder med samma id
+            </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="NumberOfTracks" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+              Antal spår i plankorsningen
+            </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="OperatingMode" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+              Driftläge, T.ex. "I drift", "Stängd", "Okänd" eller "Blankt" (okänd)
+            </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TrainFlow" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+              Tågflöde, vid värde 0 eller inget angivet värde så saknas uppgifter om tågflöde.
+            </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PortalHeightLeft" type="xs:double" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+              Portalhöjd vänster sida uttryckt i meter med högst två decimaler.<br />
+              Värdemängd: 0: Uppgift saknas, 9:  Portal finns inte
+            </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PortalHeightRight" type="xs:double" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+              Portalhöjd höger sida uttryckt i meter med högst två decimaler.<br />
+              Värdemängd: 0: Uppgift saknas, 9:  Portal finns inte
+            </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="RoadNameAlternative" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+              Alternativt vägnamn
+            </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="RoadNameOfficial" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+              Kommunalt gatunamn
+            </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="RoadProfileCrossCurve" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+              Vägprofil tvär kurva.
+              Kurva nära plankorsningen där ett vägfordon med släp riskerar att fastna. <br />
+              Värdemängd: 0: uppgift saknas, 1: Ja, 2: Nej
+            </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="RoadProfileCrest" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+              Vägprofil vägkrön.
+              Vertikal vägprofil där ett vägfordon med låg markfrigång riskerar att fastna. <br />
+              Värdemängd: 0: Uppgift saknas, 1: Ja, 2: Nej
+            </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="RoadProfileSteepSlope" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+              Vägprofil brant lutning.
+              Vägbanan inom 25 meter från plankorsningen lutar mer än +/- 35 promille. <br />
+              Värdemängd: 0: uppgift saknas, 1: Ja, 2: Nej
+            </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" name="RoadProtectionAddition" type="RoadProtectionAddition" minOccurs="0" />
+      <xs:element maxOccurs="unbounded" name="RoadProtectionBase" type="RoadProtectionBase" minOccurs="0" />
+      <xs:element name="TrackPortion" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+              Bandel
+            </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Meter" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+              Plankorsningens meter-tal enligt banans längdmätning
+            </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Kilometer" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+              Plankorsningens kilometer-tal enligt banans längdmätning
+            </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Geometry" type="geometry" minOccurs="0" />
+      <xs:element minOccurs="0" name="ModifiedTime" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Tidpunkt då dataposten ändrades</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RoadProtectionAddition">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Code" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Skyddsalternativ, tillägg <br /><div class="toggleTitle">Värdemängd</div><div class="toggle arrowR" /><div class="toggleContent">
+              1: Förenklad bevakning alternativ 1 – Vakt bevakar <br />
+              2: Förenklad bevakning alternativ 2 – Stopp framför <br />
+              3: Förenklad bevakning alternativ 3 – Sth 10 <br />
+              4: Förenklad bevakning alternativ 4 – Vakt går före <br />
+              E: Enkel ljussignal <br />
+              F: Förlängd förringningstid <br />
+              Gf: Gångfålla <br />
+              H: Hinderdetektor <br />
+              P: Plattformsanläggning med gul signalbild ”STOP” och/eller vita bommar <br />
+              S: Stoppmärke <br />
+              V: Ägovägsbom <br />
+              b: Signalering mot banan som halvbomsprincipen
+            </div></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Skyddsalternativ, tillägg - Beskrivning av kod
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RoadProtectionBase">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Code" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Skyddsalternativ, grund <br /><div class="toggleTitle">Värdemängd</div><div class="toggle arrowR" /><div class="toggleContent">
+              A: Helbommar <br />
+              B: Halvbommar <br />
+              C: Ljussignaler <br />
+              CD: Ljus- och ljudsignaler <br />
+              D: Ljudsignaler <br />
+              K: Kryssmärke <br />
+              O: Oskyddad <br />
+              -: Saknas
+            </div></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+            Skyddsalternativ, grund - Beskrivning av kod
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="geometry">
+    <xs:sequence>
+      <xs:element name="SWEREF99TM" type="WKT_SWEREF99TM" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Geometrisk punkt i koordinatsystem SWEREF99TM</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="WGS84" type="WKT_WGS84" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Geometrisk punkt i koordinatsystem WGS84</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="WKT_SWEREF99TM">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="POINT\s?\((\d+(\.\d+)?(\s|\))){2}|LINESTRING\s?\(((,\s?)?((\d+(\.\d+)?)\s?){2}){2,}\)|MULTILINESTRING\s?\(\s?((,\s?)?\(((,\s)?((\d+(\.\d+)?)\s?){2}){2,}\)){2,}\s?\)" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="WKT_WGS84">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="POINT\s?\((\d+(\.\d+)?(\s|\))){2}|LINESTRING\s?\(((,\s?)?((\d+(\.\d+)?)\s?){2}){2,}\)|MULTILINESTRING\s?\(\s?((,\s?)?\(((,\s)?((\d+(\.\d+)?)\s?){2}){2,}\)){2,}\s?\)" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
