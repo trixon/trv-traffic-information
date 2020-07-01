@@ -24,7 +24,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
-import java.nio.file.OpenOption;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
@@ -47,8 +46,10 @@ public class Trafikinformation {
     private final HttpClient mHttpClient = HttpClient.newBuilder()
             .version(HttpClient.Version.HTTP_2)
             .build();
-    private final Jarnvag mJarnvag = new Jarnvag();
     private String mKey = "";
+    private final Railroad mRailroad = new Railroad();
+    private final Road mRoad = new Road();
+    private final RoadData mRoadData = new RoadData();
     private int mTimeout = 5000;
     private String mUrl = "https://api.trafikinfo.trafikverket.se/v2/data.xml";
     private final String requestTemplate = "<REQUEST>\n"
@@ -93,7 +94,9 @@ public class Trafikinformation {
         String s = r.body();
 
         if (file != null) {
-            Files.writeString(file.toPath(), s, Charset.forName("utf-8"), new OpenOption[]{java.nio.file.StandardOpenOption.TRUNCATE_EXISTING, java.nio.file.StandardOpenOption.CREATE});
+            Files.writeString(file.toPath(), s, Charset.forName("utf-8"));
+//            FileUtils.writeStringToFile(file, s, "utf-8");
+
         }
 
         return ((JAXBElement<T>) getUnmarshaller(clazz).unmarshal(new StringReader(s))).getValue();
@@ -107,8 +110,16 @@ public class Trafikinformation {
         return mUrl;
     }
 
-    public Jarnvag jarnvag() {
-        return mJarnvag;
+    public Railroad railroad() {
+        return mRailroad;
+    }
+
+    public Road road() {
+        return mRoad;
+    }
+
+    public RoadData roadData() {
+        return mRoadData;
     }
 
     public void setKey(String key) {
@@ -134,6 +145,10 @@ public class Trafikinformation {
             sb.append(String.format(" %s=\"%s\"", entry.getKey(), entry.getValue()));
         }
 
+        if (queryDetails == null) {
+            queryDetails = "";
+        }
+
         return String.format(requestTemplate, mKey, sb.toString(), queryDetails);
     }
 
@@ -150,7 +165,7 @@ public class Trafikinformation {
         return unmarshaller;
     }
 
-    public class Jarnvag {
+    public class Railroad {
 
         public List<se.trixon.trv_trafikinformation.jarnvag.trainmessage.v1_6.RESULT> getTrainMessageResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_trafikinformation.jarnvag.trainmessage.v1_6.RESPONSE.class,
@@ -172,4 +187,43 @@ public class Trafikinformation {
                     file).getRESULT();
         }
     }
+
+    public class Road {
+
+        public List<se.trixon.trv_trafikinformation.vag.camera.v1.RESULT> getCameraResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
+            return getResponse(se.trixon.trv_trafikinformation.vag.camera.v1.RESPONSE.class,
+                    getRequest(queryAttributes, "Camera", "1", queryDetails), file).getRESULT();
+        }
+
+        public List<se.trixon.trv_trafikinformation.vag.camera.v1.RESULT> getCameraResults(File file) throws IOException, InterruptedException, JAXBException {
+            return getResponse(se.trixon.trv_trafikinformation.vag.camera.v1.RESPONSE.class,
+                    file).getRESULT();
+        }
+
+        public List<se.trixon.trv_trafikinformation.vag.trafficsafetycamera.v1.RESULT> getTrafficSafetyCameraResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
+            return getResponse(se.trixon.trv_trafikinformation.vag.trafficsafetycamera.v1.RESPONSE.class,
+                    getRequest(queryAttributes, "TrafficSafetyCamera", "1", queryDetails), file).getRESULT();
+        }
+
+        public List<se.trixon.trv_trafikinformation.vag.trafficsafetycamera.v1.RESULT> getTrafficSafetyCameraResults(File file) throws IOException, InterruptedException, JAXBException {
+            return getResponse(se.trixon.trv_trafikinformation.vag.trafficsafetycamera.v1.RESPONSE.class,
+                    file).getRESULT();
+        }
+
+        public List<se.trixon.trv_trafikinformation.vag.weatherstation.v1.RESULT> getWeatherStationResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
+            return getResponse(se.trixon.trv_trafikinformation.vag.weatherstation.v1.RESPONSE.class,
+                    getRequest(queryAttributes, "WeatherStation", "1", queryDetails), file).getRESULT();
+        }
+
+        public List<se.trixon.trv_trafikinformation.vag.weatherstation.v1.RESULT> getWeatherStationResults(File file) throws IOException, InterruptedException, JAXBException {
+            return getResponse(se.trixon.trv_trafikinformation.vag.weatherstation.v1.RESPONSE.class,
+                    file).getRESULT();
+        }
+
+    }
+
+    public class RoadData {
+
+    }
+
 }
