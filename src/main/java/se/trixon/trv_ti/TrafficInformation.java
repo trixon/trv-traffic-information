@@ -42,7 +42,8 @@ import javax.xml.bind.Unmarshaller;
  */
 public class TrafficInformation {
 
-    private final HashMap<Class, Unmarshaller> mClassToUnmarshaller = new HashMap<>();
+    private final HashMap<Class, Unmarshaller> mClassToUnmarshallerLocal = new HashMap<>();
+    private final HashMap<Class, Unmarshaller> mClassToUnmarshallerRemote = new HashMap<>();
     private final HttpClient mHttpClient = HttpClient.newBuilder()
             .version(HttpClient.Version.HTTP_2)
             .build();
@@ -70,8 +71,6 @@ public class TrafficInformation {
     }
 
     public HttpResponse<String> getHttpResponse(String requestString) throws IOException, InterruptedException {
-        Logger.getLogger(TrafficInformation.class.getName()).log(Level.INFO, requestString);
-
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofString(requestString))
                 .uri(URI.create(mUrl))
@@ -89,7 +88,7 @@ public class TrafficInformation {
     }
 
     public <T> T getResponse(Class<T> clazz, File file) throws IOException, InterruptedException, JAXBException {
-        return ((JAXBElement<T>) getUnmarshaller(clazz).unmarshal(file)).getValue();
+        return ((JAXBElement<T>) getUnmarshaller(clazz, mClassToUnmarshallerLocal).unmarshal(file)).getValue();
     }
 
     public <T> T getResponse(Class<T> clazz, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
@@ -98,11 +97,9 @@ public class TrafficInformation {
 
         if (file != null) {
             Files.writeString(file.toPath(), s, Charset.forName("utf-8"));
-//            FileUtils.writeStringToFile(file, s, "utf-8");
-
         }
 
-        return ((JAXBElement<T>) getUnmarshaller(clazz).unmarshal(new StringReader(s))).getValue();
+        return ((JAXBElement<T>) getUnmarshaller(clazz, mClassToUnmarshallerRemote).unmarshal(new StringReader(s))).getValue();
     }
 
     public int getTimeout() {
@@ -151,8 +148,8 @@ public class TrafficInformation {
         return String.format(requestTemplate, mKey, sb.toString(), queryDetails);
     }
 
-    private Unmarshaller getUnmarshaller(Class clazz) {
-        Unmarshaller unmarshaller = mClassToUnmarshaller.computeIfAbsent(clazz, k -> {
+    private Unmarshaller getUnmarshaller(Class clazz, HashMap<Class, Unmarshaller> classToUnmarshaller) {
+        Unmarshaller unmarshaller = classToUnmarshaller.computeIfAbsent(clazz, k -> {
             try {
                 return JAXBContext.newInstance(k).createUnmarshaller();
             } catch (JAXBException ex) {
@@ -189,7 +186,7 @@ public class TrafficInformation {
 
     public class Road {
 
-        private final Surcface mSurcface = new Surcface();
+        private final Surface mSurface = new Surface();
 
         public List<se.trixon.trv_ti.road.camera.v1.RESULT> getCameraResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.camera.v1.RESPONSE.class,
@@ -198,6 +195,16 @@ public class TrafficInformation {
 
         public List<se.trixon.trv_ti.road.camera.v1.RESULT> getCameraResults(File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.camera.v1.RESPONSE.class,
+                    file).getRESULT();
+        }
+
+        public List<se.trixon.trv_ti.road.parking.v1_4.RESULT> getParkingResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
+            return getResponse(se.trixon.trv_ti.road.parking.v1_4.RESPONSE.class,
+                    getRequest(queryAttributes, "Parking", "1.4", queryDetails), file).getRESULT();
+        }
+
+        public List<se.trixon.trv_ti.road.parking.v1_4.RESULT> getParkingResults(File file) throws IOException, InterruptedException, JAXBException {
+            return getResponse(se.trixon.trv_ti.road.parking.v1_4.RESPONSE.class,
                     file).getRESULT();
         }
 
@@ -221,11 +228,11 @@ public class TrafficInformation {
                     file).getRESULT();
         }
 
-        public Surcface surface() {
-            return mSurcface;
+        public Surface surface() {
+            return mSurface;
         }
 
-        public class Surcface {
+        public class Surface {
 
         }
     }
