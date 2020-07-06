@@ -25,10 +25,10 @@ import java.net.http.HttpResponse;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.time.Duration;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
@@ -42,8 +42,8 @@ import javax.xml.bind.Unmarshaller;
  */
 public class TrafficInformation {
 
-    private final HashMap<Class, Unmarshaller> mClassToUnmarshallerLocal = new HashMap<>();
-    private final HashMap<Class, Unmarshaller> mClassToUnmarshallerRemote = new HashMap<>();
+    private final ConcurrentHashMap<Class, Unmarshaller> mClassToUnmarshallerLocal = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Class, Unmarshaller> mClassToUnmarshallerRemote = new ConcurrentHashMap<>();
     private final HttpClient mHttpClient = HttpClient.newBuilder()
             .version(HttpClient.Version.HTTP_2)
             .build();
@@ -148,7 +148,7 @@ public class TrafficInformation {
         return String.format(requestTemplate, mKey, sb.toString(), queryDetails);
     }
 
-    private Unmarshaller getUnmarshaller(Class clazz, HashMap<Class, Unmarshaller> classToUnmarshaller) {
+    private Unmarshaller getUnmarshaller(Class clazz, ConcurrentHashMap<Class, Unmarshaller> classToUnmarshaller) {
         Unmarshaller unmarshaller = classToUnmarshaller.computeIfAbsent(clazz, k -> {
             try {
                 return JAXBContext.newInstance(k).createUnmarshaller();
