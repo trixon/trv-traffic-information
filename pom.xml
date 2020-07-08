@@ -5,6 +5,30 @@
     <artifactId>trv-traffic-information</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+    <url>https://github.com/trixon/trv-traffic-information</url>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>trixon</id>
+            <name>Patrik Karlström</name>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <email>patrik@trixon.se</email>
+            <url>https://trixon.se</url>
+            <timezone>+1</timezone>
+        </developer>
+    </developers>
+    <scm>
+        <url>https://github.com/trixon/trv-traffic-information</url>
+        <connection>scm:git:git://github.com/trixon/trv-traffic-information.git</connection>
+        <developerConnection>scm:git:git@github.com:trixon/trv-traffic-information.git</developerConnection>
+    </scm>
     <dependencies>
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
