@@ -123,10 +123,18 @@ public class TrafficInformation {
         return mUrl;
     }
 
+    /**
+     *
+     * @return
+     */
     public Railroad railroad() {
         return mRailroad;
     }
 
+    /**
+     *
+     * @return
+     */
     public Road road() {
         return mRoad;
     }
@@ -251,43 +259,118 @@ public class TrafficInformation {
             return getResponse(se.trixon.trv_ti.railroad.railcrossing.v1_4.RESPONSE.class, file).getRESULT();
         }
 
+        /**
+         *
+         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for this call.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.railroad.reasoncode.v1.RESULT> getReasonCodeResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.railroad.reasoncode.v1.RESPONSE.class,
                     getRequest(queryAttributes, "ReasonCode", "1", queryDetails), file).getRESULT();
         }
 
+        /**
+         *
+         * @param file the file to be unmarshalled.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.railroad.reasoncode.v1.RESULT> getReasonCodeResults(File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.railroad.reasoncode.v1.RESPONSE.class, file).getRESULT();
         }
 
+        /**
+         *
+         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for this call.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.railroad.trainannouncement.v1_6.RESULT> getTrainAnnouncementResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.railroad.trainannouncement.v1_6.RESPONSE.class,
                     getRequest(queryAttributes, "TrainAnnouncement", "1.6", queryDetails), file).getRESULT();
         }
 
+        /**
+         *
+         * @param file the file to be unmarshalled.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.railroad.trainannouncement.v1_6.RESULT> getTrainAnnouncementResults(File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.railroad.trainannouncement.v1_6.RESPONSE.class, file).getRESULT();
         }
 
+        /**
+         *
+         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for this call.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.railroad.trainmessage.v1_6.RESULT> getTrainMessageResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.railroad.trainmessage.v1_6.RESPONSE.class,
                     getRequest(queryAttributes, "TrainMessage", "1.6", queryDetails), file).getRESULT();
         }
 
+        /**
+         *
+         * @param file the file to be unmarshalled.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.railroad.trainmessage.v1_6.RESULT> getTrainMessageResults(File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.railroad.trainmessage.v1_6.RESPONSE.class, file).getRESULT();
         }
 
+        /**
+         *
+         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for this call.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.railroad.trainstation.v1.RESULT> getTrainStationResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.railroad.trainstation.v1.RESPONSE.class,
                     getRequest(queryAttributes, "TrainStation", "1", queryDetails), file).getRESULT();
         }
 
+        /**
+         *
+         * @param file the file to be unmarshalled.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.railroad.trainstation.v1.RESULT> getTrainStationResults(File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.railroad.trainstation.v1.RESPONSE.class, file).getRESULT();
         }
     }
 
+    /**
+     *
+     */
     public class Road {
 
         private final Surface mSurface = new Surface();
@@ -295,164 +378,477 @@ public class TrafficInformation {
         private Road() {
         }
 
+        /**
+         *
+         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for this call.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.road.camera.v1.RESULT> getCameraResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.camera.v1.RESPONSE.class,
                     getRequest(queryAttributes, "Camera", "1", queryDetails), file).getRESULT();
         }
 
+        /**
+         *
+         * @param file the file to be unmarshalled.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.road.camera.v1.RESULT> getCameraResults(File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.camera.v1.RESPONSE.class, file).getRESULT();
         }
 
+        /**
+         *
+         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for this call.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.road.ferryannonuncement.v1_2.RESULT> getFerryAnnouncementResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.ferryannonuncement.v1_2.RESPONSE.class,
                     getRequest(queryAttributes, "FerryAnnouncement", "1.2", queryDetails), file).getRESULT();
         }
 
+        /**
+         *
+         * @param file the file to be unmarshalled.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.road.ferryannonuncement.v1_2.RESULT> getFerryAnnouncementResults(File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.ferryannonuncement.v1_2.RESPONSE.class, file).getRESULT();
         }
 
+        /**
+         *
+         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for this call.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.road.ferryroute.v1_2.RESULT> getFerryRouteResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.ferryroute.v1_2.RESPONSE.class,
                     getRequest(queryAttributes, "FerryRoute", "1.2", queryDetails), file).getRESULT();
         }
 
+        /**
+         *
+         * @param file the file to be unmarshalled.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.road.ferryroute.v1_2.RESULT> getFerryRouteResults(File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.ferryroute.v1_2.RESPONSE.class, file).getRESULT();
         }
 
+        /**
+         *
+         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for this call.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.road.icon.v1.RESULT> getIconResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.icon.v1.RESPONSE.class,
                     getRequest(queryAttributes, "Icon", "1", queryDetails), file).getRESULT();
         }
 
+        /**
+         *
+         * @param file the file to be unmarshalled.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.road.icon.v1.RESULT> getIconResults(File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.icon.v1.RESPONSE.class, file).getRESULT();
         }
 
+        /**
+         *
+         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for this call.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.road.parking.v1_4.RESULT> getParkingResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.parking.v1_4.RESPONSE.class,
                     getRequest(queryAttributes, "Parking", "1.4", queryDetails), file).getRESULT();
         }
 
+        /**
+         *
+         * @param file the file to be unmarshalled.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.road.parking.v1_4.RESULT> getParkingResults(File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.parking.v1_4.RESPONSE.class, file).getRESULT();
         }
 
+        /**
+         *
+         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for this call.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.road.roadconditionoverview.v1.RESULT> getRoadConditionOverviewResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.roadconditionoverview.v1.RESPONSE.class,
                     getRequest(queryAttributes, "RoadConditionOverview", "1", queryDetails), file).getRESULT();
         }
 
+        /**
+         *
+         * @param file the file to be unmarshalled.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.road.roadconditionoverview.v1.RESULT> getRoadConditionOverviewResults(File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.roadconditionoverview.v1.RESPONSE.class, file).getRESULT();
         }
 
+        /**
+         *
+         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for this call.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.road.roadcondition.v1_2.RESULT> getRoadConditionResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.roadcondition.v1_2.RESPONSE.class,
                     getRequest(queryAttributes, "RoadCondition", "1.2", queryDetails), file).getRESULT();
         }
 
+        /**
+         *
+         * @param file the file to be unmarshalled.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.road.roadcondition.v1_2.RESULT> getRoadConditionResults(File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.roadcondition.v1_2.RESPONSE.class, file).getRESULT();
         }
 
+        /**
+         *
+         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for this call.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.road.situation.v1_4.RESULT> getSituationResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.situation.v1_4.RESPONSE.class,
                     getRequest(queryAttributes, "Situation", "1.4", queryDetails), file).getRESULT();
         }
 
+        /**
+         *
+         * @param file the file to be unmarshalled.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.road.situation.v1_4.RESULT> getSituationResults(File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.situation.v1_4.RESPONSE.class, file).getRESULT();
         }
 
+        /**
+         *
+         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for this call.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.road.trafficflow.v1_4.RESULT> getTrafficFlowResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.trafficflow.v1_4.RESPONSE.class,
                     getRequest(queryAttributes, "TrafficFlow", "1.4", queryDetails), file).getRESULT();
         }
 
+        /**
+         *
+         * @param file the file to be unmarshalled.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.road.trafficflow.v1_4.RESULT> getTrafficFlowResults(File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.trafficflow.v1_4.RESPONSE.class, file).getRESULT();
         }
 
+        /**
+         *
+         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for this call.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.road.trafficsafetycamera.v1.RESULT> getTrafficSafetyCameraResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.trafficsafetycamera.v1.RESPONSE.class,
                     getRequest(queryAttributes, "TrafficSafetyCamera", "1", queryDetails), file).getRESULT();
         }
 
+        /**
+         *
+         * @param file the file to be unmarshalled.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.road.trafficsafetycamera.v1.RESULT> getTrafficSafetyCameraResults(File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.trafficsafetycamera.v1.RESPONSE.class, file).getRESULT();
         }
 
+        /**
+         *
+         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for this call.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.road.traveltimeroute.v1_5.RESULT> getTravelTimeRouteResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.traveltimeroute.v1_5.RESPONSE.class,
                     getRequest(queryAttributes, "TravelTimeRoute", "1.5", queryDetails), file).getRESULT();
         }
 
+        /**
+         *
+         * @param file the file to be unmarshalled.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.road.traveltimeroute.v1_5.RESULT> getTravelTimeRouteResults(File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.traveltimeroute.v1_5.RESPONSE.class, file).getRESULT();
         }
 
+        /**
+         *
+         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for this call.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.road.weatherstation.v1.RESULT> getWeatherStationResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.weatherstation.v1.RESPONSE.class,
                     getRequest(queryAttributes, "WeatherStation", "1", queryDetails), file).getRESULT();
         }
 
+        /**
+         *
+         * @param file the file to be unmarshalled.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.road.weatherstation.v1.RESULT> getWeatherStationResults(File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.weatherstation.v1.RESPONSE.class, file).getRESULT();
         }
 
+        /**
+         *
+         * @return
+         */
         public Surface surface() {
             return mSurface;
         }
 
+        /**
+         *
+         */
         public class Surface {
 
             private Surface() {
             }
 
+            /**
+             *
+             * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
+             * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
+             * @param file the file to save. If file is null, no file is saved for this call.
+             * @return A list of <code>results</code>. Remember to check info and errors.
+             * @throws IOException
+             * @throws InterruptedException
+             * @throws JAXBException
+             */
             public List<se.trixon.trv_ti.road.surface.measurementdata100.v1.RESULT> getMeasurementData100Results(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
                 return getResponse(se.trixon.trv_ti.road.surface.measurementdata100.v1.RESPONSE.class,
                         getRequest(queryAttributes, "MeasurementData100", "1", queryDetails), file).getRESULT();
             }
 
+            /**
+             *
+             * @param file the file to be unmarshalled.
+             * @return A list of <code>results</code>. Remember to check info and errors.
+             * @throws IOException
+             * @throws InterruptedException
+             * @throws JAXBException
+             */
             public List<se.trixon.trv_ti.road.surface.measurementdata100.v1.RESULT> getMeasurementData100Results(File file) throws IOException, InterruptedException, JAXBException {
                 return getResponse(se.trixon.trv_ti.road.surface.measurementdata100.v1.RESPONSE.class, file).getRESULT();
             }
 
+            /**
+             *
+             * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
+             * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
+             * @param file the file to save. If file is null, no file is saved for this call.
+             * @return A list of <code>results</code>. Remember to check info and errors.
+             * @throws IOException
+             * @throws InterruptedException
+             * @throws JAXBException
+             */
             public List<se.trixon.trv_ti.road.surface.measurementdata20.v1.RESULT> getMeasurementData20Results(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
                 return getResponse(se.trixon.trv_ti.road.surface.measurementdata20.v1.RESPONSE.class,
                         getRequest(queryAttributes, "MeasurementData20", "1", queryDetails), file).getRESULT();
             }
 
+            /**
+             *
+             * @param file the file to be unmarshalled.
+             * @return A list of <code>results</code>. Remember to check info and errors.
+             * @throws IOException
+             * @throws InterruptedException
+             * @throws JAXBException
+             */
             public List<se.trixon.trv_ti.road.surface.measurementdata20.v1.RESULT> getMeasurementData20Results(File file) throws IOException, InterruptedException, JAXBException {
                 return getResponse(se.trixon.trv_ti.road.surface.measurementdata20.v1.RESPONSE.class, file).getRESULT();
             }
 
+            /**
+             *
+             * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
+             * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
+             * @param file the file to save. If file is null, no file is saved for this call.
+             * @return A list of <code>results</code>. Remember to check info and errors.
+             * @throws IOException
+             * @throws InterruptedException
+             * @throws JAXBException
+             */
             public List<se.trixon.trv_ti.road.surface.pavementdata.v1.RESULT> getPavementDataResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
                 return getResponse(se.trixon.trv_ti.road.surface.pavementdata.v1.RESPONSE.class,
                         getRequest(queryAttributes, "PavementData", "1", queryDetails), file).getRESULT();
             }
 
+            /**
+             *
+             * @param file the file to be unmarshalled.
+             * @return A list of <code>results</code>. Remember to check info and errors.
+             * @throws IOException
+             * @throws InterruptedException
+             * @throws JAXBException
+             */
             public List<se.trixon.trv_ti.road.surface.pavementdata.v1.RESULT> getPavementDataResults(File file) throws IOException, InterruptedException, JAXBException {
                 return getResponse(se.trixon.trv_ti.road.surface.pavementdata.v1.RESPONSE.class, file).getRESULT();
             }
 
+            /**
+             *
+             * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
+             * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
+             * @param file the file to save. If file is null, no file is saved for this call.
+             * @return A list of <code>results</code>. Remember to check info and errors.
+             * @throws IOException
+             * @throws InterruptedException
+             * @throws JAXBException
+             */
             public List<se.trixon.trv_ti.road.surface.roaddata.v1.RESULT> getRoadDataResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
                 return getResponse(se.trixon.trv_ti.road.surface.roaddata.v1.RESPONSE.class,
                         getRequest(queryAttributes, "RoadData", "1", queryDetails), file).getRESULT();
             }
 
+            /**
+             *
+             * @param file the file to be unmarshalled.
+             * @return A list of <code>results</code>. Remember to check info and errors.
+             * @throws IOException
+             * @throws InterruptedException
+             * @throws JAXBException
+             */
             public List<se.trixon.trv_ti.road.surface.roaddata.v1.RESULT> getRoadDataResults(File file) throws IOException, InterruptedException, JAXBException {
                 return getResponse(se.trixon.trv_ti.road.surface.roaddata.v1.RESPONSE.class, file).getRESULT();
             }
 
+            /**
+             *
+             * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
+             * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
+             * @param file the file to save. If file is null, no file is saved for this call.
+             * @return A list of <code>results</code>. Remember to check info and errors.
+             * @throws IOException
+             * @throws InterruptedException
+             * @throws JAXBException
+             */
             public List<se.trixon.trv_ti.road.surface.roadgeometry.v1.RESULT> getRoadGeometryResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
                 return getResponse(se.trixon.trv_ti.road.surface.roadgeometry.v1.RESPONSE.class,
                         getRequest(queryAttributes, "RoadGeometry", "1", queryDetails), file).getRESULT();
             }
 
+            /**
+             *
+             * @param file the file to be unmarshalled.
+             * @return A list of <code>results</code>. Remember to check info and errors.
+             * @throws IOException
+             * @throws InterruptedException
+             * @throws JAXBException
+             */
             public List<se.trixon.trv_ti.road.surface.roadgeometry.v1.RESULT> getRoadGeometryResults(File file) throws IOException, InterruptedException, JAXBException {
                 return getResponse(se.trixon.trv_ti.road.surface.roadgeometry.v1.RESPONSE.class, file).getRESULT();
             }
