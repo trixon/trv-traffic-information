@@ -37,6 +37,23 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 /**
+ * The only class needed to get Traffic Information from the Swedish Transport Administration.
+ *
+ * @see <a href="https://api.trafikinfo.trafikverket.se/">https://api.trafikinfo.trafikverket.se/</a>
+ *
+ * <h3>Basic usage</h3>
+ * First of all, you will need to register for a free API key. Use the link above, be sure to read their documentation too.
+ * <p>
+ * There are 3 main data categories</p>
+ * <ul>
+ * <li>Rail road</li> <li>Road</li> <li>Road surface</li> </ul>
+ * <p>
+ * Each category contains a couple of services</p>
+ * <p>
+ * There are two methods for each service</p>
+ *
+ * <ul><li>One that gets the result, with optional QUERY defintion and saves the result as a xml file.</li> <li>The other one unmarshalls an already saved file.</li> </ul>
+ *
  *
  * @author Patrik Karlström
  */
@@ -59,53 +76,49 @@ public class TrafficInformation {
             + "  </QUERY>\n"
             + "</REQUEST>";
 
+    /**
+     * Class constructor.
+     */
     public TrafficInformation() {
     }
 
+    /**
+     * Class constructor specifying the API key to use.
+     *
+     * @param key
+     */
     public TrafficInformation(String key) {
         mKey = key;
     }
 
+    /**
+     *
+     * @return
+     */
     public TreeMap<String, String> createQueryAttributes() {
         return new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
     }
 
-    public HttpResponse<String> getHttpResponse(String requestString) throws IOException, InterruptedException {
-        HttpRequest request = HttpRequest.newBuilder()
-                .POST(HttpRequest.BodyPublishers.ofString(requestString))
-                .uri(URI.create(mUrl))
-                .header("Content-Type", "text/xml")
-                .timeout(Duration.ofMillis(mTimeout))
-                .build();
-
-        HttpResponse<String> response = mHttpClient.send(request, HttpResponse.BodyHandlers.ofString());
-
-        return response;
-    }
-
+    /**
+     *
+     * @return the specified API key
+     */
     public String getKey() {
         return mKey;
     }
 
-    public <T> T getResponse(Class<T> clazz, File file) throws IOException, InterruptedException, JAXBException {
-        return ((JAXBElement<T>) getUnmarshaller(clazz, mClassToUnmarshallerLocal).unmarshal(file)).getValue();
-    }
-
-    public <T> T getResponse(Class<T> clazz, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
-        HttpResponse<String> r = getHttpResponse(queryDetails);
-        String s = r.body();
-
-        if (file != null) {
-            Files.writeString(file.toPath(), s, Charset.forName("utf-8"));
-        }
-
-        return ((JAXBElement<T>) getUnmarshaller(clazz, mClassToUnmarshallerRemote).unmarshal(new StringReader(s))).getValue();
-    }
-
+    /**
+     *
+     * @return the timeout in use (milliseconds)
+     */
     public int getTimeout() {
         return mTimeout;
     }
 
+    /**
+     *
+     * @return the base service url
+     */
     public String getUrl() {
         return mUrl;
     }
@@ -118,16 +131,43 @@ public class TrafficInformation {
         return mRoad;
     }
 
+    /**
+     * Sets the API key to use.
+     *
+     * @param key
+     */
     public void setKey(String key) {
         mKey = key;
     }
 
+    /**
+     * Sets the timeout to use (milliseconds).
+     *
+     * @param timeout
+     */
     public void setTimeout(int timeout) {
         mTimeout = timeout;
     }
 
+    /**
+     *
+     * @param url
+     */
     public void setUrl(String url) {
         mUrl = url;
+    }
+
+    private HttpResponse<String> getHttpResponse(String requestString) throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .POST(HttpRequest.BodyPublishers.ofString(requestString))
+                .uri(URI.create(mUrl))
+                .header("Content-Type", "text/xml")
+                .timeout(Duration.ofMillis(mTimeout))
+                .build();
+
+        HttpResponse<String> response = mHttpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+        return response;
     }
 
     private String getRequest(TreeMap<String, String> queryAttributes, String objecttype, String schemaversion, String queryDetails) {
@@ -148,6 +188,21 @@ public class TrafficInformation {
         return String.format(requestTemplate, mKey, sb.toString(), queryDetails);
     }
 
+    private <T> T getResponse(Class<T> clazz, File file) throws IOException, InterruptedException, JAXBException {
+        return ((JAXBElement<T>) getUnmarshaller(clazz, mClassToUnmarshallerLocal).unmarshal(file)).getValue();
+    }
+
+    private <T> T getResponse(Class<T> clazz, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
+        HttpResponse<String> r = getHttpResponse(queryDetails);
+        String s = r.body();
+
+        if (file != null) {
+            Files.writeString(file.toPath(), s, Charset.forName("utf-8"));
+        }
+
+        return ((JAXBElement<T>) getUnmarshaller(clazz, mClassToUnmarshallerRemote).unmarshal(new StringReader(s))).getValue();
+    }
+
     private Unmarshaller getUnmarshaller(Class clazz, ConcurrentHashMap<Class, Unmarshaller> classToUnmarshaller) {
         Unmarshaller unmarshaller = classToUnmarshaller.computeIfAbsent(clazz, k -> {
             try {
@@ -161,13 +216,37 @@ public class TrafficInformation {
         return unmarshaller;
     }
 
+    /**
+     *
+     */
     public class Railroad {
 
+        private Railroad() {
+        }
+
+        /**
+         *
+         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for this call.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.railroad.railcrossing.v1_4.RESULT> getRailCrossingResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.railroad.railcrossing.v1_4.RESPONSE.class,
                     getRequest(queryAttributes, "RailCrossing", "1.4", queryDetails), file).getRESULT();
         }
 
+        /**
+         *
+         * @param file the file to be unmarshalled.
+         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
         public List<se.trixon.trv_ti.railroad.railcrossing.v1_4.RESULT> getRailCrossingResults(File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.railroad.railcrossing.v1_4.RESPONSE.class, file).getRESULT();
         }
@@ -212,6 +291,9 @@ public class TrafficInformation {
     public class Road {
 
         private final Surface mSurface = new Surface();
+
+        private Road() {
+        }
 
         public List<se.trixon.trv_ti.road.camera.v1.RESULT> getCameraResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
             return getResponse(se.trixon.trv_ti.road.camera.v1.RESPONSE.class,
@@ -326,6 +408,9 @@ public class TrafficInformation {
         }
 
         public class Surface {
+
+            private Surface() {
+            }
 
             public List<se.trixon.trv_ti.road.surface.measurementdata100.v1.RESULT> getMeasurementData100Results(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
                 return getResponse(se.trixon.trv_ti.road.surface.measurementdata100.v1.RESPONSE.class,
