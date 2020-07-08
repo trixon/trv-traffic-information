@@ -29,6 +29,21 @@
         <connection>scm:git:git://github.com/trixon/trv-traffic-information.git</connection>
         <developerConnection>scm:git:git@github.com:trixon/trv-traffic-information.git</developerConnection>
     </scm>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <showDeprecation>true</showDeprecation>
+                    <compilerArgs>
+                        <arg>-Xlint</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
     <dependencies>
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
