@@ -16,7 +16,7 @@ xjc -p se.trixon.trv_traffic_information.road.road.surface.measurementdata20.v1 
 xjc -p se.trixon.trv_traffic_information.road.road.surface.pavementdata.v1 ../resources/vag_belaggningsinformation/PavementData_v1.xsd
 xjc -p se.trixon.trv_traffic_information.road.road.surface.roaddata.v1 ../resources/vag_belaggningsinformation/RoadData_v1.xsd
 xjc -p se.trixon.trv_traffic_information.road.road.surface.roadgeometry.v1 ../resources/vag_belaggningsinformation/RoadGeometry_v1.xsd
-xjc -p se.trixon.trv_traffic_information.road.camera.v1 ../resources/vag_trafikinformation/Camera_v1.xsd
+xjc -p se.trixon.trv_traffic_information.road.camera.v1_1 ../resources/vag_trafikinformation/Camera_v1_1.xsd
 xjc -p se.trixon.trv_traffic_information.road.ferryannonuncement.v1_2 ../resources/vag_trafikinformation/FerryAnnouncement_v1.2.xsd
 xjc -p se.trixon.trv_traffic_information.road.ferryroute.v1_2 ../resources/vag_trafikinformation/FerryRoute_v1.2.xsd
 xjc -p se.trixon.trv_traffic_information.road.icon.v1 ../resources/vag_trafikinformation/Icon_v1.xsd
@@ -27,5 +27,6 @@ xjc -p se.trixon.trv_traffic_information.road.situation.v1_4 ../resources/vag_tr
 xjc -p se.trixon.trv_traffic_information.road.trafficflow.v1_4 ../resources/vag_trafikinformation/TrafficFlow_v1.4.xsd
 xjc -p se.trixon.trv_traffic_information.road.trafficsafetycamera.v1 ../resources/vag_trafikinformation/TrafficSafetyCamera_v1.xsd
 xjc -p se.trixon.trv_traffic_information.road.traveltimeroute.v1_5 ../resources/vag_trafikinformation/TravelTimeRoute_v1.5.xsd
-xjc -p se.trixon.trv_traffic_information.road.weatherstation.v1 ../resources/vag_trafikinformation/WeatherStation_v1.xsd
+xjc -p se.trixon.trv_traffic_information.road.weathermeasurepoint.v2_1 ../resources/vag_trafikinformation/WeatherMeasurepoint_v2.1.xsd
+xjc -p se.trixon.trv_traffic_information.road.weatherobservation.v2_1 ../resources/vag_trafikinformation/WeatherObservation_v2.1.xsd
 ```

@@ -37,12 +37,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * The only class needed to get Traffic Information from the Swedish Transport Administration.
+ * The only class needed to get Traffic Information from the Swedish Transport
+ * Administration.
  *
- * @see <a href="https://api.trafikinfo.trafikverket.se/">https://api.trafikinfo.trafikverket.se/</a>
+ * @see
+ * <a href="https://api.trafikinfo.trafikverket.se/">https://api.trafikinfo.trafikverket.se/</a>
  *
  * <h3>Basic usage</h3>
- * First of all, you will need to register for a free API key. Use the link above, be sure to read their documentation too.
+ * First of all, you will need to register for a free API key. Use the link
+ * above, be sure to read their documentation too.
  * <p>
  * There are 3 main data categories</p>
  * <ul>
@@ -52,7 +55,9 @@ import java.util.logging.Logger;
  * <p>
  * There are two methods for each service</p>
  *
- * <ul><li>One that gets the result, with optional QUERY defintion and saves the result as a xml file.</li> <li>The other one unmarshalls an already saved file.</li> </ul>
+ * <ul><li>One that gets the result, with optional QUERY defintion and saves the
+ * result as a xml file.</li> <li>The other one unmarshalls an already saved
+ * file.</li> </ul>
  *
  *
  * @author Patrik Karlström
@@ -234,10 +239,14 @@ public class TrafficInformation {
 
         /**
          *
-         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
-         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
-         * @param file the file to save. If file is null, no file is saved for this call.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @param queryAttributes the key/value pairs of the QUERY attributes.
+         * <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and
+         * &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for
+         * this call.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -250,7 +259,8 @@ public class TrafficInformation {
         /**
          *
          * @param file the file to be unmarshalled.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -261,10 +271,14 @@ public class TrafficInformation {
 
         /**
          *
-         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
-         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
-         * @param file the file to save. If file is null, no file is saved for this call.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @param queryAttributes the key/value pairs of the QUERY attributes.
+         * <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and
+         * &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for
+         * this call.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -277,7 +291,8 @@ public class TrafficInformation {
         /**
          *
          * @param file the file to be unmarshalled.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -288,10 +303,14 @@ public class TrafficInformation {
 
         /**
          *
-         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
-         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
-         * @param file the file to save. If file is null, no file is saved for this call.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @param queryAttributes the key/value pairs of the QUERY attributes.
+         * <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and
+         * &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for
+         * this call.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -304,7 +323,8 @@ public class TrafficInformation {
         /**
          *
          * @param file the file to be unmarshalled.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -315,10 +335,14 @@ public class TrafficInformation {
 
         /**
          *
-         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
-         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
-         * @param file the file to save. If file is null, no file is saved for this call.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @param queryAttributes the key/value pairs of the QUERY attributes.
+         * <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and
+         * &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for
+         * this call.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -331,7 +355,8 @@ public class TrafficInformation {
         /**
          *
          * @param file the file to be unmarshalled.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -342,10 +367,14 @@ public class TrafficInformation {
 
         /**
          *
-         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
-         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
-         * @param file the file to save. If file is null, no file is saved for this call.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @param queryAttributes the key/value pairs of the QUERY attributes.
+         * <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and
+         * &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for
+         * this call.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -358,7 +387,8 @@ public class TrafficInformation {
         /**
          *
          * @param file the file to be unmarshalled.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -380,37 +410,46 @@ public class TrafficInformation {
 
         /**
          *
-         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
-         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
-         * @param file the file to save. If file is null, no file is saved for this call.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @param queryAttributes the key/value pairs of the QUERY attributes.
+         * <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and
+         * &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for
+         * this call.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
          */
-        public List<se.trixon.trv_traffic_information.road.camera.v1.RESULT> getCameraResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
-            return getResponse(se.trixon.trv_traffic_information.road.camera.v1.RESPONSE.class,
+        public List<se.trixon.trv_traffic_information.road.camera.v1_1.RESULT> getCameraResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
+            return getResponse(se.trixon.trv_traffic_information.road.camera.v1_1.RESPONSE.class,
                     getRequest(queryAttributes, "Camera", "1", queryDetails), file).getRESULT();
         }
 
         /**
          *
          * @param file the file to be unmarshalled.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
          */
-        public List<se.trixon.trv_traffic_information.road.camera.v1.RESULT> getCameraResults(File file) throws IOException, InterruptedException, JAXBException {
-            return getResponse(se.trixon.trv_traffic_information.road.camera.v1.RESPONSE.class, file).getRESULT();
+        public List<se.trixon.trv_traffic_information.road.camera.v1_1.RESULT> getCameraResults(File file) throws IOException, InterruptedException, JAXBException {
+            return getResponse(se.trixon.trv_traffic_information.road.camera.v1_1.RESPONSE.class, file).getRESULT();
         }
 
         /**
          *
-         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
-         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
-         * @param file the file to save. If file is null, no file is saved for this call.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @param queryAttributes the key/value pairs of the QUERY attributes.
+         * <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and
+         * &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for
+         * this call.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -423,7 +462,8 @@ public class TrafficInformation {
         /**
          *
          * @param file the file to be unmarshalled.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -434,10 +474,14 @@ public class TrafficInformation {
 
         /**
          *
-         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
-         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
-         * @param file the file to save. If file is null, no file is saved for this call.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @param queryAttributes the key/value pairs of the QUERY attributes.
+         * <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and
+         * &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for
+         * this call.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -450,7 +494,8 @@ public class TrafficInformation {
         /**
          *
          * @param file the file to be unmarshalled.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -461,10 +506,14 @@ public class TrafficInformation {
 
         /**
          *
-         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
-         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
-         * @param file the file to save. If file is null, no file is saved for this call.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @param queryAttributes the key/value pairs of the QUERY attributes.
+         * <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and
+         * &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for
+         * this call.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -477,7 +526,8 @@ public class TrafficInformation {
         /**
          *
          * @param file the file to be unmarshalled.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -488,10 +538,14 @@ public class TrafficInformation {
 
         /**
          *
-         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
-         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
-         * @param file the file to save. If file is null, no file is saved for this call.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @param queryAttributes the key/value pairs of the QUERY attributes.
+         * <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and
+         * &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for
+         * this call.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -504,7 +558,8 @@ public class TrafficInformation {
         /**
          *
          * @param file the file to be unmarshalled.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -515,10 +570,14 @@ public class TrafficInformation {
 
         /**
          *
-         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
-         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
-         * @param file the file to save. If file is null, no file is saved for this call.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @param queryAttributes the key/value pairs of the QUERY attributes.
+         * <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and
+         * &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for
+         * this call.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -531,7 +590,8 @@ public class TrafficInformation {
         /**
          *
          * @param file the file to be unmarshalled.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -542,10 +602,14 @@ public class TrafficInformation {
 
         /**
          *
-         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
-         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
-         * @param file the file to save. If file is null, no file is saved for this call.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @param queryAttributes the key/value pairs of the QUERY attributes.
+         * <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and
+         * &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for
+         * this call.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -558,7 +622,8 @@ public class TrafficInformation {
         /**
          *
          * @param file the file to be unmarshalled.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -569,10 +634,14 @@ public class TrafficInformation {
 
         /**
          *
-         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
-         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
-         * @param file the file to save. If file is null, no file is saved for this call.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @param queryAttributes the key/value pairs of the QUERY attributes.
+         * <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and
+         * &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for
+         * this call.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -585,7 +654,8 @@ public class TrafficInformation {
         /**
          *
          * @param file the file to be unmarshalled.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -596,10 +666,14 @@ public class TrafficInformation {
 
         /**
          *
-         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
-         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
-         * @param file the file to save. If file is null, no file is saved for this call.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @param queryAttributes the key/value pairs of the QUERY attributes.
+         * <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and
+         * &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for
+         * this call.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -612,7 +686,8 @@ public class TrafficInformation {
         /**
          *
          * @param file the file to be unmarshalled.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -623,10 +698,14 @@ public class TrafficInformation {
 
         /**
          *
-         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
-         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
-         * @param file the file to save. If file is null, no file is saved for this call.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @param queryAttributes the key/value pairs of the QUERY attributes.
+         * <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and
+         * &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for
+         * this call.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -639,7 +718,8 @@ public class TrafficInformation {
         /**
          *
          * @param file the file to be unmarshalled.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -650,10 +730,14 @@ public class TrafficInformation {
 
         /**
          *
-         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
-         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
-         * @param file the file to save. If file is null, no file is saved for this call.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @param queryAttributes the key/value pairs of the QUERY attributes.
+         * <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and
+         * &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for
+         * this call.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -666,7 +750,8 @@ public class TrafficInformation {
         /**
          *
          * @param file the file to be unmarshalled.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
@@ -677,29 +762,66 @@ public class TrafficInformation {
 
         /**
          *
-         * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
-         * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
-         * @param file the file to save. If file is null, no file is saved for this call.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @param queryAttributes the key/value pairs of the QUERY attributes.
+         * <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and
+         * &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for
+         * this call.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
          */
-        public List<se.trixon.trv_traffic_information.road.weatherstation.v1.RESULT> getWeatherStationResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
-            return getResponse(se.trixon.trv_traffic_information.road.weatherstation.v1.RESPONSE.class,
-                    getRequest(queryAttributes, "WeatherStation", "1", queryDetails), file).getRESULT();
+        public List<se.trixon.trv_traffic_information.road.weathermeasurepoint.v2_1.RESULT> getWeatherMeasurepointResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
+            return getResponse(se.trixon.trv_traffic_information.road.weathermeasurepoint.v2_1.RESPONSE.class,
+                    getRequest(queryAttributes, "WeatherMeasurepoint", "1", queryDetails), file).getRESULT();
         }
 
         /**
          *
          * @param file the file to be unmarshalled.
-         * @return A list of <code>results</code>. Remember to check info and errors.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
          * @throws IOException
          * @throws InterruptedException
          * @throws JAXBException
          */
-        public List<se.trixon.trv_traffic_information.road.weatherstation.v1.RESULT> getWeatherStationResults(File file) throws IOException, InterruptedException, JAXBException {
-            return getResponse(se.trixon.trv_traffic_information.road.weatherstation.v1.RESPONSE.class, file).getRESULT();
+        public List<se.trixon.trv_traffic_information.road.weathermeasurepoint.v2_1.RESULT> getWeatherMeasurepointResults(File file) throws IOException, InterruptedException, JAXBException {
+            return getResponse(se.trixon.trv_traffic_information.road.weathermeasurepoint.v2_1.RESPONSE.class, file).getRESULT();
+        }
+
+        /**
+         *
+         * @param queryAttributes the key/value pairs of the QUERY attributes.
+         * <code>null</code> is valid.
+         * @param queryDetails the part of the query between &lt;QUERY&gt; and
+         * &lt;/QUERY&gt;. <code>null</code> is valid.
+         * @param file the file to save. If file is null, no file is saved for
+         * this call.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
+        public List<se.trixon.trv_traffic_information.road.weatherobservation.v2_1.RESULT> getWeatherObservationResults(TreeMap<String, String> queryAttributes, String queryDetails, File file) throws IOException, InterruptedException, JAXBException {
+            return getResponse(se.trixon.trv_traffic_information.road.weatherobservation.v2_1.RESPONSE.class,
+                    getRequest(queryAttributes, "WeatherObservation", "1", queryDetails), file).getRESULT();
+        }
+
+        /**
+         *
+         * @param file the file to be unmarshalled.
+         * @return A list of <code>results</code>. Remember to check info and
+         * errors.
+         * @throws IOException
+         * @throws InterruptedException
+         * @throws JAXBException
+         */
+        public List<se.trixon.trv_traffic_information.road.weatherobservation.v2_1.RESULT> getWeatherObservationResults(File file) throws IOException, InterruptedException, JAXBException {
+            return getResponse(se.trixon.trv_traffic_information.road.weatherobservation.v2_1.RESPONSE.class, file).getRESULT();
         }
 
         /**
@@ -720,10 +842,14 @@ public class TrafficInformation {
 
             /**
              *
-             * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
-             * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
-             * @param file the file to save. If file is null, no file is saved for this call.
-             * @return A list of <code>results</code>. Remember to check info and errors.
+             * @param queryAttributes the key/value pairs of the QUERY
+             * attributes. <code>null</code> is valid.
+             * @param queryDetails the part of the query between &lt;QUERY&gt;
+             * and &lt;/QUERY&gt;. <code>null</code> is valid.
+             * @param file the file to save. If file is null, no file is saved
+             * for this call.
+             * @return A list of <code>results</code>. Remember to check info
+             * and errors.
              * @throws IOException
              * @throws InterruptedException
              * @throws JAXBException
@@ -736,7 +862,8 @@ public class TrafficInformation {
             /**
              *
              * @param file the file to be unmarshalled.
-             * @return A list of <code>results</code>. Remember to check info and errors.
+             * @return A list of <code>results</code>. Remember to check info
+             * and errors.
              * @throws IOException
              * @throws InterruptedException
              * @throws JAXBException
@@ -747,10 +874,14 @@ public class TrafficInformation {
 
             /**
              *
-             * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
-             * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
-             * @param file the file to save. If file is null, no file is saved for this call.
-             * @return A list of <code>results</code>. Remember to check info and errors.
+             * @param queryAttributes the key/value pairs of the QUERY
+             * attributes. <code>null</code> is valid.
+             * @param queryDetails the part of the query between &lt;QUERY&gt;
+             * and &lt;/QUERY&gt;. <code>null</code> is valid.
+             * @param file the file to save. If file is null, no file is saved
+             * for this call.
+             * @return A list of <code>results</code>. Remember to check info
+             * and errors.
              * @throws IOException
              * @throws InterruptedException
              * @throws JAXBException
@@ -763,7 +894,8 @@ public class TrafficInformation {
             /**
              *
              * @param file the file to be unmarshalled.
-             * @return A list of <code>results</code>. Remember to check info and errors.
+             * @return A list of <code>results</code>. Remember to check info
+             * and errors.
              * @throws IOException
              * @throws InterruptedException
              * @throws JAXBException
@@ -774,10 +906,14 @@ public class TrafficInformation {
 
             /**
              *
-             * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
-             * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
-             * @param file the file to save. If file is null, no file is saved for this call.
-             * @return A list of <code>results</code>. Remember to check info and errors.
+             * @param queryAttributes the key/value pairs of the QUERY
+             * attributes. <code>null</code> is valid.
+             * @param queryDetails the part of the query between &lt;QUERY&gt;
+             * and &lt;/QUERY&gt;. <code>null</code> is valid.
+             * @param file the file to save. If file is null, no file is saved
+             * for this call.
+             * @return A list of <code>results</code>. Remember to check info
+             * and errors.
              * @throws IOException
              * @throws InterruptedException
              * @throws JAXBException
@@ -790,7 +926,8 @@ public class TrafficInformation {
             /**
              *
              * @param file the file to be unmarshalled.
-             * @return A list of <code>results</code>. Remember to check info and errors.
+             * @return A list of <code>results</code>. Remember to check info
+             * and errors.
              * @throws IOException
              * @throws InterruptedException
              * @throws JAXBException
@@ -801,10 +938,14 @@ public class TrafficInformation {
 
             /**
              *
-             * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
-             * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
-             * @param file the file to save. If file is null, no file is saved for this call.
-             * @return A list of <code>results</code>. Remember to check info and errors.
+             * @param queryAttributes the key/value pairs of the QUERY
+             * attributes. <code>null</code> is valid.
+             * @param queryDetails the part of the query between &lt;QUERY&gt;
+             * and &lt;/QUERY&gt;. <code>null</code> is valid.
+             * @param file the file to save. If file is null, no file is saved
+             * for this call.
+             * @return A list of <code>results</code>. Remember to check info
+             * and errors.
              * @throws IOException
              * @throws InterruptedException
              * @throws JAXBException
@@ -817,7 +958,8 @@ public class TrafficInformation {
             /**
              *
              * @param file the file to be unmarshalled.
-             * @return A list of <code>results</code>. Remember to check info and errors.
+             * @return A list of <code>results</code>. Remember to check info
+             * and errors.
              * @throws IOException
              * @throws InterruptedException
              * @throws JAXBException
@@ -828,10 +970,14 @@ public class TrafficInformation {
 
             /**
              *
-             * @param queryAttributes the key/value pairs of the QUERY attributes. <code>null</code> is valid.
-             * @param queryDetails the part of the query between &lt;QUERY&gt; and &lt;/QUERY&gt;. <code>null</code> is valid.
-             * @param file the file to save. If file is null, no file is saved for this call.
-             * @return A list of <code>results</code>. Remember to check info and errors.
+             * @param queryAttributes the key/value pairs of the QUERY
+             * attributes. <code>null</code> is valid.
+             * @param queryDetails the part of the query between &lt;QUERY&gt;
+             * and &lt;/QUERY&gt;. <code>null</code> is valid.
+             * @param file the file to save. If file is null, no file is saved
+             * for this call.
+             * @return A list of <code>results</code>. Remember to check info
+             * and errors.
              * @throws IOException
              * @throws InterruptedException
              * @throws JAXBException
@@ -844,7 +990,8 @@ public class TrafficInformation {
             /**
              *
              * @param file the file to be unmarshalled.
-             * @return A list of <code>results</code>. Remember to check info and errors.
+             * @return A list of <code>results</code>. Remember to check info
+             * and errors.
              * @throws IOException
              * @throws InterruptedException
              * @throws JAXBException

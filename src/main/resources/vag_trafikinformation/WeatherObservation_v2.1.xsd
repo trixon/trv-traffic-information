@@ -1,0 +1,767 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dc="http://schema.data.trafikverket.se/dc">
+  <xs:annotation>
+    <xs:documentation xml:lang="sv">
+Väderinformation på ett normativt sätt. Datamängden innehåller samtliga observationer 7 dagar tillbaka.
+Mättekniskt så levererar inte all sensorer exakt lika mätvärde
+trots att mätspecikationen kan vara densamma. Ur vägvädersynvinkel så kan det dock vara ett mätvärde som är representativt för
+tidpunkt och mätpunkt, exempelvis en yttemperatur och en lufttemperatur, dessa är då normativa.
+</xs:documentation>
+  </xs:annotation>
+  <xs:annotation>
+    <xs:documentation xml:lang="sv">
+CloudFree saknade metadata. Fixat i version 2.1.
+</xs:documentation>
+    <xs:documentation xml:lang="en">
+CloudFree missing metadata. Fixed in version 2.1
+</xs:documentation>
+  </xs:annotation>
+  <xs:element name="RESPONSE" type="RESPONSE" />
+  <xs:complexType name="RESPONSE">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="RESULT" type="RESULT" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RESULT">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="WeatherObservation" type="WeatherObservation" minOccurs="0" />
+      <xs:element minOccurs="0" name="ERROR" type="ERROR" />
+      <xs:element minOccurs="0" name="INFO" type="INFO" />
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="ERROR">
+    <xs:sequence>
+      <xs:element name="SOURCE" type="xs:string" minOccurs="0" />
+      <xs:element name="MESSAGE" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LASTMODIFIED">
+    <xs:attribute name="datetime" type="xs:dateTime" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="EVALRESULT">
+    <xs:sequence>
+      <xs:any minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="INFO">
+    <xs:sequence>
+      <xs:element name="LASTMODIFIED" type="LASTMODIFIED" minOccurs="0" />
+      <xs:element name="LASTCHANGEID" type="xs:string" minOccurs="0" />
+      <xs:element name="EVALRESULT" type="EVALRESULT" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="SSEURL" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="WeatherObservation">
+    <xs:complexContent mixed="false">
+      <xs:extension base="ObservationBase">
+        <xs:sequence>
+          <xs:element dc:key="true" name="Id" type="xs:string" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="sv">
+									Unik publiceringsidentitet för observationen.
+								</xs:documentation>
+              <xs:documentation xml:lang="en">
+									Unique publication identity for the observation.
+								</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="Measurepoint" type="Location" minOccurs="0" />
+          <xs:element ref="Deleted" minOccurs="0" />
+          <xs:element name="ModifiedTime" type="xs:dateTime" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+        Specifies when the object is stored.
+      </xs:documentation>
+              <xs:documentation xml:lang="sv">
+        Anger när objektet är sparat.
+      </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attributeGroup ref="QueueAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ObservationBase">
+    <xs:annotation>
+      <xs:documentation xml:lang="sv">
+				Observation av vägväder, väder och väglag, vid en viss mätpunkt en viss tidpunkt.
+			</xs:documentation>
+      <xs:documentation xml:lang="en">
+				Observation of road weather, weather and road conditions, at a certain measurement point at a certain time.
+			</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Sample" type="xs:dateTime" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Tidpunkt som observationen avser, inklusive tidzon för att hantera sommartid och normaltid.
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							The time to which the observation relates, including the time zone to deal with daylight saving time and standard time.
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Weather" type="Weather" minOccurs="0" />
+      <xs:element name="Surface" type="SurfaceCondition" minOccurs="0" />
+      <xs:element name="Air" type="AirCondition" minOccurs="0" />
+      <xs:element maxOccurs="2" name="Wind" type="WindCondition" minOccurs="0" />
+      <xs:element name="DeicingChemical" type="DeicingChemical" minOccurs="0" />
+      <xs:element name="Subsurface" type="SubsurfaceCondition" minOccurs="0" />
+      <xs:element name="Aggregated5minutes" type="Aggregated5minutes" minOccurs="0" />
+      <xs:element name="Aggregated10minutes" type="Aggregated10minutes" minOccurs="0" />
+      <xs:element name="Aggregated30minutes" type="Aggregated30minutes" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Location">
+    <xs:sequence>
+      <xs:element name="Id" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Unik identitet för en mätpunkt
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							Unique identity of a measurement point
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Name" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Mätpunktens namn
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							Name of the measuring point
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Geometry" type="Geometry" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element default="false" name="Deleted" type="xs:boolean">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">
+				Specifies if the object is deleted.
+			</xs:documentation>
+      <xs:documentation xml:lang="sv">
+				Anger om objektet är raderat.
+			</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:attributeGroup name="QueueAttributes">
+    <xs:attribute name="checkoutid" type="xs:string" use="optional" />
+    <xs:attribute name="checkouts" type="xs:integer" use="optional" />
+    <xs:attribute name="leaseduntil" type="xs:dateTime" use="optional" />
+    <xs:attribute name="acknowledged" type="xs:dateTime" use="optional" />
+    <xs:attribute name="statuscode" type="xs:unsignedByte" use="optional" />
+    <xs:attribute name="itemsacknowledged" type="xs:long" use="optional" />
+    <xs:attribute name="itemsleft" type="xs:long" use="optional" />
+  </xs:attributeGroup>
+  <xs:complexType name="Weather">
+    <xs:sequence>
+      <xs:element name="Precipitation" type="PrecipTypeMeasure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+						Vilken typ av nederbörd som detekterats.
+					</xs:documentation>
+          <xs:documentation xml:lang="en">
+						The type of precipitation detected.
+					</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SurfaceCondition">
+    <xs:annotation>
+      <xs:documentation xml:lang="sv">
+				Väglag, förhållanden vid vägytan.
+			</xs:documentation>
+      <xs:documentation xml:lang="en">
+				Road conditions, conditions at the road surface.
+			</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Temperature" type="CelsiusMeasure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Vägytans temperatur.  Value [C]
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							The temperature of the road surface. Value [C]
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Water" type="BoolMeasure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Förekomst av vatten på vägytan.
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							Presence of water on the road surface.
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Ice" type="BoolMeasure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Förekomst av is på vägytan.
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							Presence of ice on the road surface.
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Snow" type="BoolMeasure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Förekomst av snö på vägytan.
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							Presence of snow on the road surface.
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Grip" type="GripMeasure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Value [0-1]
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							Value [0-1]
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="WaterDepth" type="MillimetersMeasure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Vattendjup på vägytan. Value [mm]
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							Water depth on the road surface. Value [mm]
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="IceDepth" type="MillimetersMeasure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Isdjup på vägytan. Value [mm]
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							Ice depth on the road surface. Value [mm]
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="SnowDepth" type="SnowAmount" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Snödjup på vägytan.
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							Snow depth on the road surface.
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AirCondition">
+    <xs:annotation>
+      <xs:documentation xml:lang="sv">
+				Luftförhållanden, atmosfäriska förhållanden nära mark.
+			</xs:documentation>
+      <xs:documentation xml:lang="en">
+				Air conditions, atmospheric conditions close to the ground.
+			</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Temperature" type="CelsiusMeasure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Lufttemperatur.  Value [C]
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							Air temperature. Value [C]
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Dewpoint" type="CelsiusMeasure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Daggpunkt, den temperatur där vatten kondenserar. Value [C]
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							Dew point, the temperature at which water condenses. Value [C]
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="RelativeHumidity" type="PercentageMeasure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Relativ luftfuktighet. Andel av den fukt som luften kan bära. Vid 100% är luften mättad. Value [%]
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							Relative humidity. Proportion of the moisture that the air can carry. At 100%, the air is saturated. Value [%]
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="VisibleDistance" type="MetersMeasure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Den sträcka det finns sikt. Value [m] OBS! Ej kvalitetssäkrad.
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							The distance there is visibility. Value [m] Please note, quality not verified.
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="WindCondition">
+    <xs:annotation>
+      <xs:documentation xml:lang="sv">
+				Vindförhållanden nära mark.
+			</xs:documentation>
+      <xs:documentation xml:lang="en">
+				Wind conditions close to the ground.
+			</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Height" type="WindSensorHeight" minOccurs="0" />
+      <xs:element name="Speed" type="MetersPerSecondMeasure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Mått på vindhastighet vid en viss tidpunkt. Medelvärde över tiominutersperiod t.o.m. tidpunkten. Value [m/s]
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							Measure of wind speed at a specific point in time. Average over a ten-minute period up to and including the time period. Value [m/s]
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Direction" type="DegreesMeasure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Mått på vindriktning vid en viss tidpunkt. Medelvärde över tiominutersperiod t.o.m. tidpunkten. Value [grader]
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							Measure of wind direction at a given point in time. Average over a ten-minute period up to and including the time period. Value [degrees]
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DeicingChemical">
+    <xs:annotation>
+      <xs:documentation xml:lang="sv">
+				Förekomst av halkbekämpningsmedel (salt). Avser mätpunkten, förekomsten kan variera över vägbanan.
+			</xs:documentation>
+      <xs:documentation xml:lang="en">
+				Presence of de-icing agents (salt). Refers to the measuring point, the occurrence may vary across the road surface.
+			</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Amount" type="GramPerSquareMeterMeasure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Mängd salt vid mätpunkten. Value [g/kvm]
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							Amount of salt at the measuring point. Value [g/sqm]
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SubsurfaceCondition">
+    <xs:annotation>
+      <xs:documentation xml:lang="sv">
+				Förhållanden under vägytan.
+			</xs:documentation>
+      <xs:documentation xml:lang="en">
+				Conditions below the road surface.
+			</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="Ground" type="GroundCondition" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Aggregated5minutes">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Aggregated" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Aggregated10minutes">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Aggregated" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Aggregated30minutes">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Aggregated" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Geometry">
+    <xs:sequence>
+      <xs:element name="SWEREF99TM" type="WKT-SWEREF99TM-3D" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Geometrisk punkt i koordinatsystem SWEREF99TM</xs:documentation>
+          <xs:documentation xml:lang="en">Geometric point in coordinate system SWEREF99TM</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="WGS84" type="WKT-WGS84-3D" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">Geometrisk punkt i koordinatsystem WGS84</xs:documentation>
+          <xs:documentation xml:lang="en">Geometric point in coordinate system WGS84</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="PrecipTypeMeasure">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="no" />
+      <xs:enumeration value="rain" />
+      <xs:enumeration value="freezing_rain" />
+      <xs:enumeration value="snow" />
+      <xs:enumeration value="sleet" />
+      <xs:enumeration value="yes" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="CelsiusMeasure">
+    <xs:complexContent mixed="false">
+      <xs:extension base="ValueMetadata">
+        <xs:sequence>
+          <xs:element name="Value" type="DecimalMeasure" minOccurs="0" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BoolMeasure">
+    <xs:simpleContent>
+      <xs:extension base="xs:boolean" />
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="GripMeasure">
+    <xs:complexContent mixed="false">
+      <xs:extension base="ValueMetadata">
+        <xs:sequence>
+          <xs:element name="Value" type="DecimalMeasure_0-1" minOccurs="0" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="MillimetersMeasure">
+    <xs:complexContent mixed="false">
+      <xs:extension base="ValueMetadata">
+        <xs:sequence>
+          <xs:element name="Value" type="DecimalMeasure" minOccurs="0" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SnowAmount">
+    <xs:sequence>
+      <xs:element name="Solid" type="MillimetersMeasure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Mängd snö.  Value [mm]
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							Amount of snow. Value [mm]
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="WaterEquivalent" type="MillimetersMeasure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Mängd vatten som snön motsvarar i smält form. Value [mm]
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							Amount of water that the snow corresponds to in melted form. Value [mm]
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PercentageMeasure">
+    <xs:complexContent mixed="false">
+      <xs:extension base="ValueMetadata">
+        <xs:sequence>
+          <xs:element name="Value" type="DecimalMeasure_0-100" minOccurs="0" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="MetersMeasure">
+    <xs:complexContent mixed="false">
+      <xs:extension base="ValueMetadata">
+        <xs:sequence>
+          <xs:element name="Value" type="DecimalMeasure" minOccurs="0" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="WindSensorHeight">
+    <xs:annotation>
+      <xs:documentation xml:lang="sv">
+				Vindsensorns höjdplacering [m]
+			</xs:documentation>
+      <xs:documentation xml:lang="en">
+				Height of the wind sensor [m]
+			</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:int">
+      <xs:enumeration value="6" />
+      <xs:enumeration value="10" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="MetersPerSecondMeasure">
+    <xs:complexContent mixed="false">
+      <xs:extension base="ValueMetadata">
+        <xs:sequence>
+          <xs:element name="Value" type="DecimalMeasure" minOccurs="0" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DegreesMeasure">
+    <xs:complexContent mixed="false">
+      <xs:extension base="ValueMetadata">
+        <xs:sequence>
+          <xs:element name="Value" type="IntMeasure_0-360" minOccurs="0" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="GramPerSquareMeterMeasure">
+    <xs:complexContent mixed="false">
+      <xs:extension base="ValueMetadata">
+        <xs:sequence>
+          <xs:element name="Value" type="DecimalMeasure" minOccurs="0" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="GroundCondition">
+    <xs:annotation>
+      <xs:documentation xml:lang="sv">
+				Förhållanden vid ett visst djup i marken.
+			</xs:documentation>
+      <xs:documentation xml:lang="en">
+				Conditions at a certain depth in the ground.
+			</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Depth" type="IntegerCentimetersConfig" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Det djup som observationen avser och är negativt för att återspegla att det avser under markytan. Value [cm]
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							The depth to which the observation refers and is negative to reflect that it refers to below the surface of the ground. Value [cm]
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Temperature" type="CelsiusMeasure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Temperatur (grader celsius) vid ett visst djup i marken. Value [C]
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							Temperature (degrees celsius) at a certain depth in the ground. Value [C]
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Aggregated">
+    <xs:sequence>
+      <xs:element name="Wind" type="WindConditionAggregated" minOccurs="0" />
+      <xs:element name="Precipitation" type="PrecipitationConditionAggregated" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="WKT-SWEREF99TM-3D">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">
+				Specifies a well known text in SWEREF99 format.
+				The coordinate order is in X Y Z, where Z is optional.
+			</xs:documentation>
+      <xs:documentation xml:lang="sv">
+				Anger en well known text i SWEREF99-format.
+				Koordinaternas ordning anges i X Y Z, där Z är frivillig.
+			</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(POINT|LINESTRING|MULTILINESTRING|POLYGON|MULTIPOLYGON)\s?(Z|M?)\s?\(.*\)" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="WKT-WGS84-3D">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">
+				Specifies a well known text in WGS84 format.
+				The coordinate order is in X Y Z, where Z is optional.
+			</xs:documentation>
+      <xs:documentation xml:lang="sv">
+				Anger en well known text i WGS84-format.
+				Koordinaternas ordning anges i X Y Z, där Z är frivillig.
+			</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(POINT|LINESTRING|MULTILINESTRING|POLYGON|MULTIPOLYGON)\s?(Z|M?)\s?\(.*\)" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ValueMetadata">
+    <xs:sequence>
+      <xs:element name="Origin" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+						Mätvärdets ursprung
+					</xs:documentation>
+          <xs:documentation xml:lang="en">
+						Origin of the metric
+					</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="calculated" />
+            <xs:enumeration value="measured" />
+            <xs:enumeration value="estimated" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="SensorNames" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+						Sensorernas beteckning
+					</xs:documentation>
+          <xs:documentation xml:lang="en">
+						Designation of the sensors
+					</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DecimalMeasure">
+    <xs:simpleContent>
+      <xs:extension base="xs:decimal" />
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DecimalMeasure_0-1">
+    <xs:simpleContent>
+      <xs:extension base="Decimal_0-1" />
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DecimalMeasure_0-100">
+    <xs:simpleContent>
+      <xs:extension base="Decimal_0-100" />
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="IntMeasure_0-360">
+    <xs:simpleContent>
+      <xs:extension base="Int_0-360" />
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="IntegerCentimetersConfig">
+    <xs:complexContent mixed="false">
+      <xs:extension base="ValueMetadata">
+        <xs:sequence>
+          <xs:element name="Value" type="xs:int" minOccurs="0" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="WindConditionAggregated">
+    <xs:sequence>
+      <xs:element name="Height" type="WindSensorHeight" minOccurs="0" />
+      <xs:element name="SpeedMax" type="MetersPerSecondMeasure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Högst uppmätt 3-sekundersmedelvärde under perioden. Value [m/s]
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							Highest measured 3-second average over the period. Value [m/s]
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="SpeedAverage" type="MetersPerSecondMeasure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Value [m/s]
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							Value [m/s]
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PrecipitationConditionAggregated">
+    <xs:sequence>
+      <xs:element name="Rain" type="BoolMeasure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Förekomst av regn.
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							Presence of rain.
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Snow" type="BoolMeasure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Förekomst av snö.
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							Presence of snow.
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="RainSum" type="MillimetersMeasure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Mängd regn under perioden. Value [mm]
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							Amount of rain during the period. Value [mm]
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="SnowSum" type="SnowAmount" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Mängd snö under perioden.
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							Amount of snow during the period.
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TotalWaterEquivalent" type="MillimetersMeasure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="sv">
+							Mängd vatten som nederbörden under perioden motsvarar. Value [mm]
+						</xs:documentation>
+          <xs:documentation xml:lang="en">
+							Amount of water to which the precipitation during the period corresponds. Value [mm]
+						</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="Decimal_0-1">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="0" />
+      <xs:maxInclusive value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Decimal_0-100">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="0" />
+      <xs:maxInclusive value="100" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Int_0-360">
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="0" />
+      <xs:maxInclusive value="360" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
