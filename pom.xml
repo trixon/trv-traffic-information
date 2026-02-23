@@ -46,7 +46,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.14.1</version>
+                <version>3.15.0</version>
                 <configuration>
                     <showDeprecation>true</showDeprecation>
                     <compilerArgs>
@@ -91,7 +91,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
-                <version>2.20.1</version>
+                <version>2.21.0</version>
                 <configuration>
                     <generateBackupPoms>false</generateBackupPoms>
                 </configuration>
@@ -130,7 +130,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>license-maven-plugin</artifactId>
-                <version>2.7.0</version>
+                <version>2.7.1</version>
                 <executions>
                     <execution>
                         <id>download-licenses</id>
@@ -147,7 +147,7 @@
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
-            <version>4.0.4</version>
+            <version>4.0.5</version>
         </dependency>
     </dependencies>
 
